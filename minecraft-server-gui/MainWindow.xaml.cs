@@ -79,7 +79,7 @@ namespace minecraft_server_gui
                 Status_ProgressBar.Value = 100.0;
 
                 Button_Stop.IsEnabled = true;
-                ServerIsRunning = true;
+                //ServerIsRunning = true;
                 Status_Text.Content = "Сервер работает.";
                 Status_ProgressBar.Value = 0.0;
             }
@@ -164,6 +164,24 @@ namespace minecraft_server_gui
 
         private void PrintLogMessage(string arg)
         {
+            if (!ServerIsRunning)
+            {
+                string data = arg.Substring(33);
+                string data2 = arg.Substring(33, 4);
+                if (data2 == "Done") Textbox_Log.Text += data2 + "\n";
+                switch (data)
+                {
+                    case "Loading properties":
+                        Textbox_Log.Text += data + "\n";
+                        break;
+                    case "Generating keypair":
+                        Textbox_Log.Text += data + "\n";
+                        break;
+                    case "Preparing start region for level 0":
+                        Textbox_Log.Text += data + "\n";
+                        break;
+                }
+            }
             Textbox_Log.ScrollToEnd();
             Textbox_Log.Text += arg + "\n";
         }
