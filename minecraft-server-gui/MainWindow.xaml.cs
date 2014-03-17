@@ -27,6 +27,7 @@ namespace minecraft_server_gui
         System.Diagnostics.Process SERVER = new Process();
         System.IO.StreamWriter SERVER_INPUT;
         System.IO.StreamReader SERVER_OUTPUT;
+        Thread t;
         
         public bool ServerIsRunning = false;
 
@@ -68,6 +69,11 @@ namespace minecraft_server_gui
             {
                 SERVER_INPUT = SERVER.StandardInput;
                 SERVER_OUTPUT = SERVER.StandardOutput;
+
+                t = new Thread(new ThreadStart(GetLogMessage));
+                t.Name = "Server output reader";
+                t.Start();
+
                 Status_ProgressBar.Value = 100.0;
 
                 Button_Stop.IsEnabled = true;
@@ -87,6 +93,7 @@ namespace minecraft_server_gui
             else SERVER.Kill();
             Button_Start.IsEnabled = true;
             ServerIsRunning = false;
+            t.Abort();
             Status_Text.Content = "Сервер выключен.";
         }
 
@@ -101,6 +108,7 @@ namespace minecraft_server_gui
             if (ServerIsRunning)
             {
                 SERVER_INPUT.WriteLine("/tellraw @a {text:\"[ADMIN] " + Textbox_Send.Text + "\",color:green,bold:true}");
+                Textbox_Log.ScrollToEnd();
                 Textbox_Log.Text += "[ADMIN] " + Textbox_Send.Text + "\n";
             }
             else
@@ -125,6 +133,7 @@ namespace minecraft_server_gui
         {
             if (ServerIsRunning)
             {
+                t.Abort();
                 if (SERVER.Responding)
                 {
                     SERVER_INPUT.WriteLine("/stop");
@@ -137,6 +146,29 @@ namespace minecraft_server_gui
         {
             Admin admin = new Admin();
             admin.Show();
+        }
+
+        private delegate void Invoker(string arg);
+
+        private void PrintLogMessage(string arg)
+        {
+            Textbox_Log.ScrollToEnd();
+            Textbox_Log.Text += arg + "\n";
+        }
+
+        private void GetLogMessage()
+        {
+            while (true)
+            {
+                if (!Dispatcher.CheckAccess())
+                {
+                    Dispatcher.Invoke(new Invoker(PrintLogMessage), SERVER_OUTPUT.ReadLine());
+                }
+                else
+                {
+                    PrintLogMessage(SERVER_OUTPUT.ReadLine());
+                }
+            }
         }
     }
 }
