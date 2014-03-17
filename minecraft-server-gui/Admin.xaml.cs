@@ -19,6 +19,9 @@ namespace minecraft_server_gui
     /// </summary>
     public partial class Admin : Window
     {
+
+        public System.IO.StreamWriter SERVER_INPUT;
+
         public Admin()
         {
             InitializeComponent();
@@ -31,7 +34,8 @@ namespace minecraft_server_gui
 
         private void Button_Admin_Enter_Click(object sender, RoutedEventArgs e)
         {
-            
+            SERVER_INPUT.WriteLine(Textbox_Admin_Input.Text);
+            Textbox_Admin_Input.Text = "";
         }
     }
 }

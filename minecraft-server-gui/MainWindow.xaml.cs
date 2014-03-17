@@ -24,16 +24,18 @@ namespace minecraft_server_gui
     /// </summary>
     public partial class MainWindow : Window
     {
-        System.Diagnostics.Process SERVER = new Process();
-        System.IO.StreamWriter SERVER_INPUT;
-        System.IO.StreamReader SERVER_OUTPUT;
-        Thread t;
+        private System.Diagnostics.Process SERVER = new Process();
+        private System.IO.StreamWriter SERVER_INPUT;
+        private System.IO.StreamReader SERVER_OUTPUT;
+        private Thread t;
+        private Admin admin;
         
         public bool ServerIsRunning = false;
 
         public MainWindow()
         {
             InitializeComponent();
+            admin = new Admin();
             Textbox_Log.TextWrapping = TextWrapping.Wrap;
             Textbox_Log.AcceptsReturn = true;
             Textbox_Log.IsReadOnly = true;
@@ -144,8 +146,18 @@ namespace minecraft_server_gui
 
         private void Button_Admin_Click(object sender, RoutedEventArgs e)
         {
-            Admin admin = new Admin();
-            admin.Show();
+            if (ServerIsRunning)
+            {
+                admin.SERVER_INPUT = SERVER_INPUT;
+                admin.Left = this.Left + this.Width;
+                admin.Top = this.Top;
+                admin.Owner = this;
+                admin.Show();
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Нельзя зайти в админ. консоль при выключенном сервере.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private delegate void Invoker(string arg);
@@ -169,6 +181,12 @@ namespace minecraft_server_gui
                     PrintLogMessage(SERVER_OUTPUT.ReadLine());
                 }
             }
+        }
+
+        private void Window_LocationChanged(object sender, EventArgs e)
+        {
+            admin.Left = this.Left + this.Width;
+            admin.Top = this.Top;
         }
     }
 }
