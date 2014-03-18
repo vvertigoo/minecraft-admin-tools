@@ -31,6 +31,7 @@ namespace minecraft_server_gui
         private Admin admin;
         
         public bool ServerIsRunning = false;
+        public bool ServerShutdown = false;
 
         public MainWindow()
         {
@@ -59,29 +60,25 @@ namespace minecraft_server_gui
             Status_Text.Content = "Запускаем...";
 
             SERVER.StartInfo.FileName = Properties.Settings.Default.java_path;
-            Status_ProgressBar.Value = 0.0;
             SERVER.StartInfo.Arguments = "-Xmx1024M -Xms1024M -jar minecraft_server.jar nogui";
             SERVER.StartInfo.CreateNoWindow = true;
             SERVER.StartInfo.UseShellExecute = false;
             SERVER.StartInfo.RedirectStandardInput = true;
             SERVER.StartInfo.RedirectStandardOutput = true;
-            Status_ProgressBar.Value = 5.0;
+            Status_ProgressBar.Value = 3.0;
 
             if (SERVER.Start())
             {
+                Status_ProgressBar.Value = 5.0;
                 SERVER_INPUT = SERVER.StandardInput;
                 SERVER_OUTPUT = SERVER.StandardOutput;
 
+                Status_ProgressBar.Value = 10.0;
                 t = new Thread(new ThreadStart(GetLogMessage));
                 t.Name = "Server output reader";
                 t.Start();
 
-                Status_ProgressBar.Value = 100.0;
-
-                Button_Stop.IsEnabled = true;
-                //ServerIsRunning = true;
-                Status_Text.Content = "Сервер работает.";
-                Status_ProgressBar.Value = 0.0;
+                Status_ProgressBar.Value = 15.0;
             }
         }
 
@@ -93,10 +90,11 @@ namespace minecraft_server_gui
                 SERVER_INPUT.WriteLine("/stop");
             }
             else SERVER.Kill();
-            Button_Start.IsEnabled = true;
-            ServerIsRunning = false;
-            t.Abort();
-            Status_Text.Content = "Сервер выключен.";
+            ServerShutdown = true;
+            //Button_Start.IsEnabled = true;
+            //ServerIsRunning = false;
+            //t.Abort();
+            //Status_Text.Content = "Сервер выключен.";
         }
 
         private void Button_Settings_Click(object sender, RoutedEventArgs e)
@@ -166,21 +164,26 @@ namespace minecraft_server_gui
         {
             if (!ServerIsRunning)
             {
-                string data = arg.Substring(33);
-                string data2 = arg.Substring(33, 4);
-                if (data2 == "Done") Textbox_Log.Text += data2 + "\n";
-                switch (data)
+                if (arg.Contains("Starting minecraft server version")) Status_ProgressBar.Value = 25.0;
+                else if (arg.Contains("Loading properties")) Status_ProgressBar.Value = 45.0;
+                else if (arg.Contains("Default game type")) Status_ProgressBar.Value = 65.0;
+                else if (arg.Contains("Generating keypair")) Status_ProgressBar.Value = 75.0;
+                else if (arg.Contains("Preparing level")) Status_ProgressBar.Value = 85.0;
+                else if (arg.Contains("Preparing start region")) Status_ProgressBar.Value = 90.0;
+                else if (arg.Contains("Preparing spawn area")) Status_ProgressBar.Value = 95.0;
+                else if (arg.Contains("Done"))
                 {
-                    case "Loading properties":
-                        Textbox_Log.Text += data + "\n";
-                        break;
-                    case "Generating keypair":
-                        Textbox_Log.Text += data + "\n";
-                        break;
-                    case "Preparing start region for level 0":
-                        Textbox_Log.Text += data + "\n";
-                        break;
+                    Status_ProgressBar.Value = 0.0;
+                    Button_Stop.IsEnabled = true;
+                    ServerIsRunning = true;
+                    Status_Text.Content = "Сервер работает.";
                 }
+            }
+            else if (ServerShutdown)
+            {
+                Status_Text.Content = "Выключаем...";
+                Status_ProgressBar.Value = 50.0;
+                ShutownServer();
             }
             Textbox_Log.ScrollToEnd();
             Textbox_Log.Text += arg + "\n";
@@ -199,6 +202,23 @@ namespace minecraft_server_gui
                     PrintLogMessage(SERVER_OUTPUT.ReadLine());
                 }
             }
+        }
+
+        private void ShutownServer()
+        {
+            while (true)
+            {
+                if (SERVER.HasExited)
+                {
+                    break;
+                }
+            }
+            Button_Start.IsEnabled = true;
+            ServerIsRunning = false;
+            ServerShutdown = false;
+            t.Abort();
+            Status_ProgressBar.Value = 0.0;
+            Status_Text.Content = "Сервер выключен.";
         }
 
         private void Window_LocationChanged(object sender, EventArgs e)
