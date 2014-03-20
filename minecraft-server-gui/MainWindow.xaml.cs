@@ -29,6 +29,7 @@ namespace minecraft_server_gui
         private System.IO.StreamReader SERVER_OUTPUT;
         private Thread t;
         private Admin admin;
+        private byte playersOnline;
         
         public bool ServerIsRunning = false;
         public bool ServerShutdown = false;
@@ -39,6 +40,8 @@ namespace minecraft_server_gui
             Textbox_Log.TextWrapping = TextWrapping.Wrap;
             Textbox_Log.AcceptsReturn = true;
             Textbox_Log.IsReadOnly = true;
+            playersOnline = 0;
+            UpdatePlayersOnline();
         }
 
         private void Button_Exit_Click(object sender, RoutedEventArgs e)
@@ -181,6 +184,25 @@ namespace minecraft_server_gui
                 Status_ProgressBar.Value = 50.0;
                 ShutownServer();
             }
+            else
+            {
+                if(arg.Contains("joined the game"))
+                {
+                    //string nickname = arg.Substring(33);
+                    //nickname = nickname.Substring(0, nickname.Length - 16);
+                    playersOnline += 1;
+                    UpdatePlayersOnline();
+                }
+                else if (arg.Contains("left the game"))
+                {
+                    //string nickname = arg.Substring(33);
+                    //nickname = nickname.Substring(0, nickname.Length - 16);
+                    playersOnline -= 1;
+                    UpdatePlayersOnline();
+                }
+
+            }
+
             Textbox_Log.ScrollToEnd();
             Textbox_Log.Text += arg + "\n";
         }
@@ -224,6 +246,11 @@ namespace minecraft_server_gui
                 admin.Left = this.Left + this.Width;
                 admin.Top = this.Top;
             }
+        }
+
+        private void UpdatePlayersOnline()
+        {
+            Status_Players_Online.Content = "Игроков онлайн: " + Convert.ToString(playersOnline);
         }
     }
 }

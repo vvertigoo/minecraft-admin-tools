@@ -10,7 +10,8 @@
         <StatusBar HorizontalAlignment="Left" Height="34" Margin="0,279,0,0" VerticalAlignment="Top" Width="517" >
             <Label x:Name="Status_Text" Content="Сервер выключен." HorizontalAlignment="Right" VerticalAlignment="Top" Width="115"/>
             <ProgressBar x:Name="Status_ProgressBar" Height="15" Width="100" Margin="20,0,0,0"/>
-            <Separator Height="34" VerticalAlignment="Top" Width="1" Margin="-225,0,0,0"/>
+            <Separator Height="34" VerticalAlignment="Top" Width="1" Margin="20,0,0,0"/>
+            <Label x:Name="Status_Players_Online" Content="Игроков онлайн: 1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Margin="92,0,0,0" HorizontalContentAlignment="Right"/>
         </StatusBar>
         <TextBox x:Name="Textbox_Send" HorizontalAlignment="Left" Height="23" Margin="10,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="364" GotFocus="Textbox_Send_GotFocus" LostFocus="Textbox_Send_LostFocus"/>
         <Button x:Name="Button_Send" Content="Написать в чат" HorizontalAlignment="Left" Margin="379,20,0,0" VerticalAlignment="Top" Width="119" Click="Button_Send_Click"/>
