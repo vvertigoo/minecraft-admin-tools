@@ -1,4 +1,4 @@
-Welcome to my minecraft admin tools.
+# Welcome to my minecraft admin tools.
 --------------------------------------------------------------
 
 Today I have only one tool - Minecraft Server GUI. You can find it in "Distr" folder.
@@ -13,12 +13,12 @@ To use it you need follow this simple steps:
 
 
 
-Changelog:
+## Changelog:
 --------------------------------------------------------------
 
-*v0.2
-** Updated admin console. It has full functional now.
-** Added server RAM setting.
+### v0.2
+* Updated admin console. It has full functional now.
+* Added server RAM setting.
 
-*v0.1
-** Initial release
+### v0.1
+* Initial release
