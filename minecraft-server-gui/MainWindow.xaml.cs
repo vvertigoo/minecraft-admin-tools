@@ -36,7 +36,6 @@ namespace minecraft_server_gui
         public MainWindow()
         {
             InitializeComponent();
-            admin = new Admin();
             Textbox_Log.TextWrapping = TextWrapping.Wrap;
             Textbox_Log.AcceptsReturn = true;
             Textbox_Log.IsReadOnly = true;
@@ -91,10 +90,6 @@ namespace minecraft_server_gui
             }
             else SERVER.Kill();
             ServerShutdown = true;
-            //Button_Start.IsEnabled = true;
-            //ServerIsRunning = false;
-            //t.Abort();
-            //Status_Text.Content = "Сервер выключен.";
         }
 
         private void Button_Settings_Click(object sender, RoutedEventArgs e)
@@ -146,11 +141,11 @@ namespace minecraft_server_gui
         {
             if (ServerIsRunning)
             {
+                admin = new Admin();
                 admin.SERVER_INPUT = SERVER_INPUT;
                 admin.Left = this.Left + this.Width;
                 admin.Top = this.Top;
                 admin.Owner = this;
-                Properties.Settings.Default.IsAdminConsoleActive = true;
                 admin.Show();
             }
             else
