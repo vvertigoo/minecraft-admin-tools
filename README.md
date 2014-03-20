@@ -16,6 +16,9 @@ To use it you need follow this simple steps:
 ## Changelog:
 --------------------------------------------------------------
 
+### v0.2.1
+* Admin console hotfix
+
 ### v0.2
 * Updated admin console. It has full functional now.
 * Added server RAM setting.
