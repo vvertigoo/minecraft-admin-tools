@@ -16,7 +16,7 @@
         <TextBox x:Name="Textbox_Send" HorizontalAlignment="Left" Height="23" Margin="10,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="364" GotFocus="Textbox_Send_GotFocus" LostFocus="Textbox_Send_LostFocus"/>
         <Button x:Name="Button_Send" Content="Написать в чат" HorizontalAlignment="Left" Margin="379,20,0,0" VerticalAlignment="Top" Width="119" Click="Button_Send_Click"/>
         <TextBox x:Name="Textbox_Log" HorizontalAlignment="Left" Height="147" Margin="10,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="488"/>
-        <Button x:Name="Button_Players" Content="Игроки" HorizontalAlignment="Left" Margin="322,218,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
+        <Button x:Name="Button_Players" Content="Игроки" HorizontalAlignment="Left" Margin="322,218,0,0" VerticalAlignment="Top" Width="75" Click="Button_Players_Click"/>
         <Button x:Name="Button_Admin" Content="Консоль" HorizontalAlignment="Left" Margin="322,252,0,0" VerticalAlignment="Top" Width="75" Click="Button_Admin_Click"/>
     </Grid>
 </Window>

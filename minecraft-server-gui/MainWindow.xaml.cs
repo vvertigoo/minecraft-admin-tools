@@ -24,19 +24,25 @@ namespace minecraft_server_gui
     /// </summary>
     public partial class MainWindow : Window
     {
-        private System.Diagnostics.Process SERVER = new Process();
+        private System.Diagnostics.Process SERVER;
         private System.IO.StreamWriter SERVER_INPUT;
         private System.IO.StreamReader SERVER_OUTPUT;
         private Thread t;
         private Admin admin;
+        private Players players;
         private byte playersOnline;
         
-        public bool ServerIsRunning = false;
-        public bool ServerShutdown = false;
+        public bool ServerIsRunning;
+        public bool ServerShutdown;
 
         public MainWindow()
         {
             InitializeComponent();
+            Properties.Settings.Default.IsAdminConsoleActive = false;
+            Properties.Settings.Default.IsPlayerWindowActive = false;
+            ServerIsRunning = false;
+            ServerShutdown = false;
+            SERVER = new Process();
             Textbox_Log.TextWrapping = TextWrapping.Wrap;
             Textbox_Log.AcceptsReturn = true;
             Textbox_Log.IsReadOnly = true;
@@ -149,6 +155,7 @@ namespace minecraft_server_gui
                 admin.Left = this.Left + this.Width;
                 admin.Top = this.Top;
                 admin.Owner = this;
+                Properties.Settings.Default.IsAdminConsoleActive = true;
                 admin.Show();
             }
             else
@@ -188,15 +195,19 @@ namespace minecraft_server_gui
             {
                 if(arg.Contains("joined the game"))
                 {
-                    //string nickname = arg.Substring(33);
-                    //nickname = nickname.Substring(0, nickname.Length - 16);
+                    string nickname = arg.Substring(33);
+                    nickname = nickname.Substring(0, nickname.Length - 16);
+                    Properties.Settings.Default.PlayerNames.Add(nickname);
+                    if (Properties.Settings.Default.IsPlayerWindowActive) players.List_Players.Items.Refresh();
                     playersOnline += 1;
                     UpdatePlayersOnline();
                 }
                 else if (arg.Contains("left the game"))
                 {
-                    //string nickname = arg.Substring(33);
-                    //nickname = nickname.Substring(0, nickname.Length - 16);
+                    string nickname = arg.Substring(33);
+                    nickname = nickname.Substring(0, nickname.Length - 14);
+                    Properties.Settings.Default.PlayerNames.Remove(nickname);
+                    if(Properties.Settings.Default.IsPlayerWindowActive) players.List_Players.Items.Refresh();
                     playersOnline -= 1;
                     UpdatePlayersOnline();
                 }
@@ -246,11 +257,33 @@ namespace minecraft_server_gui
                 admin.Left = this.Left + this.Width;
                 admin.Top = this.Top;
             }
+            if (Properties.Settings.Default.IsPlayerWindowActive)
+            {
+                players.Left = this.Left;
+                players.Top = this.Top + this.Height;
+            }
         }
 
         private void UpdatePlayersOnline()
         {
             Status_Players_Online.Content = "Игроков онлайн: " + Convert.ToString(playersOnline);
+        }
+
+        private void Button_Players_Click(object sender, RoutedEventArgs e)
+        {
+            if (ServerIsRunning)
+            {
+                players = new Players();
+                players.Left = this.Left;
+                players.Top = this.Top + this.Height;
+                players.Owner = this;
+                Properties.Settings.Default.IsPlayerWindowActive = true;
+                players.Show();
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Игроки при выключенном сервере? Ты серьёзно?", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

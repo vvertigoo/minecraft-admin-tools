@@ -1,4 +1,6 @@
-﻿namespace minecraft_server_gui.Properties {
+﻿using System.Collections.Generic;
+
+namespace minecraft_server_gui.Properties {
     
     
     // Этот класс позволяет обрабатывать определенные события в классе параметров:
@@ -10,6 +12,8 @@
 
         public UpdateMacrosNames UpdateMacrosNamesMethod;
         public bool IsAdminConsoleActive;
+        public bool IsPlayerWindowActive;
+        public List<string> PlayerNames;
         
         public Settings() {
             // // Для добавления обработчиков событий для сохранения и изменения параметров раскомментируйте приведенные ниже строки:
@@ -17,6 +21,8 @@
             // this.SettingChanging += this.SettingChangingEventHandler;
             //
             this.SettingsSaving += this.SettingsSavingEventHandler;
+            IsPlayerWindowActive = false;
+            PlayerNames = new List<string>();
             //
         }
         
