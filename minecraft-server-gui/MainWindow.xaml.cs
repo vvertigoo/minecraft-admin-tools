@@ -219,8 +219,11 @@ namespace minecraft_server_gui
 
         private void Window_LocationChanged(object sender, EventArgs e)
         {
-            admin.Left = this.Left + this.Width;
-            admin.Top = this.Top;
+            if (Properties.Settings.Default.IsAdminConsoleActive)
+            {
+                admin.Left = this.Left + this.Width;
+                admin.Top = this.Top;
+            }
         }
     }
 }
