@@ -9,3 +9,16 @@ To use it you need follow this simple steps:
 * Run it.
 * Go to prefernces and select your java.exe location.
 * Press "Run server" and enjoy)
+
+
+
+
+Changelog:
+--------------------------------------------------------------
+
+*v0.2
+** Updated admin console. It has full functional now.
+** Added server RAM setting.
+
+*v0.1
+** Initial release
