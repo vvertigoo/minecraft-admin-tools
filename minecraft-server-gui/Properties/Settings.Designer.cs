@@ -38,5 +38,365 @@ namespace minecraft_server_gui.Properties {
                 this["java_path"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Макрос 1")]
+        public string macro_1_name {
+            get {
+                return ((string)(this["macro_1_name"]));
+            }
+            set {
+                this["macro_1_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string macro_1_value {
+            get {
+                return ((string)(this["macro_1_value"]));
+            }
+            set {
+                this["macro_1_value"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string macro_2_value {
+            get {
+                return ((string)(this["macro_2_value"]));
+            }
+            set {
+                this["macro_2_value"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string macro_3_value {
+            get {
+                return ((string)(this["macro_3_value"]));
+            }
+            set {
+                this["macro_3_value"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string macro_4_value {
+            get {
+                return ((string)(this["macro_4_value"]));
+            }
+            set {
+                this["macro_4_value"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Макрос 5")]
+        public string macro_5_name {
+            get {
+                return ((string)(this["macro_5_name"]));
+            }
+            set {
+                this["macro_5_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string macro_5_value {
+            get {
+                return ((string)(this["macro_5_value"]));
+            }
+            set {
+                this["macro_5_value"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Макрос 6")]
+        public string macro_6_name {
+            get {
+                return ((string)(this["macro_6_name"]));
+            }
+            set {
+                this["macro_6_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string macro_6_value {
+            get {
+                return ((string)(this["macro_6_value"]));
+            }
+            set {
+                this["macro_6_value"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Макрос 7")]
+        public string macro_7_name {
+            get {
+                return ((string)(this["macro_7_name"]));
+            }
+            set {
+                this["macro_7_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string macro_7_value {
+            get {
+                return ((string)(this["macro_7_value"]));
+            }
+            set {
+                this["macro_7_value"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Макрос 8")]
+        public string macro_8_name {
+            get {
+                return ((string)(this["macro_8_name"]));
+            }
+            set {
+                this["macro_8_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string macro_8_value {
+            get {
+                return ((string)(this["macro_8_value"]));
+            }
+            set {
+                this["macro_8_value"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Макрос 9")]
+        public string macro_9_name {
+            get {
+                return ((string)(this["macro_9_name"]));
+            }
+            set {
+                this["macro_9_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string macro_9_value {
+            get {
+                return ((string)(this["macro_9_value"]));
+            }
+            set {
+                this["macro_9_value"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Макрос 10")]
+        public string macro_10_name {
+            get {
+                return ((string)(this["macro_10_name"]));
+            }
+            set {
+                this["macro_10_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string macro_10_value {
+            get {
+                return ((string)(this["macro_10_value"]));
+            }
+            set {
+                this["macro_10_value"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Макрос 11")]
+        public string macro_11_name {
+            get {
+                return ((string)(this["macro_11_name"]));
+            }
+            set {
+                this["macro_11_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string macro_11_value {
+            get {
+                return ((string)(this["macro_11_value"]));
+            }
+            set {
+                this["macro_11_value"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Макрос 12")]
+        public string macro_12_name {
+            get {
+                return ((string)(this["macro_12_name"]));
+            }
+            set {
+                this["macro_12_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string macro_12_value {
+            get {
+                return ((string)(this["macro_12_value"]));
+            }
+            set {
+                this["macro_12_value"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Макрос 13")]
+        public string macro_13_name {
+            get {
+                return ((string)(this["macro_13_name"]));
+            }
+            set {
+                this["macro_13_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string macro_13_value {
+            get {
+                return ((string)(this["macro_13_value"]));
+            }
+            set {
+                this["macro_13_value"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Макрос 14")]
+        public string macro_14_name {
+            get {
+                return ((string)(this["macro_14_name"]));
+            }
+            set {
+                this["macro_14_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string macro_14_value {
+            get {
+                return ((string)(this["macro_14_value"]));
+            }
+            set {
+                this["macro_14_value"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Макрос 15")]
+        public string macro_15_name {
+            get {
+                return ((string)(this["macro_15_name"]));
+            }
+            set {
+                this["macro_15_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string macro_15_value {
+            get {
+                return ((string)(this["macro_15_value"]));
+            }
+            set {
+                this["macro_15_value"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Макрос 2")]
+        public string macro_2_name {
+            get {
+                return ((string)(this["macro_2_name"]));
+            }
+            set {
+                this["macro_2_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Макрос 3")]
+        public string macro_3_name {
+            get {
+                return ((string)(this["macro_3_name"]));
+            }
+            set {
+                this["macro_3_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Макрос 4")]
+        public string macro_4_name {
+            get {
+                return ((string)(this["macro_4_name"]));
+            }
+            set {
+                this["macro_4_name"] = value;
+            }
+        }
     }
 }

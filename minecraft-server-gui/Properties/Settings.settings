@@ -5,5 +5,95 @@
     <Setting Name="java_path" Description="Путь к java.exe" Type="System.String" Scope="User">
       <Value Profile="(Default)">c:\Program Files (x86)\Java\jre7\bin\java.exe</Value>
     </Setting>
+    <Setting Name="macro_1_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Макрос 1</Value>
+    </Setting>
+    <Setting Name="macro_1_value" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="macro_2_value" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="macro_3_value" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="macro_4_value" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="macro_5_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Макрос 5</Value>
+    </Setting>
+    <Setting Name="macro_5_value" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="macro_6_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Макрос 6</Value>
+    </Setting>
+    <Setting Name="macro_6_value" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="macro_7_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Макрос 7</Value>
+    </Setting>
+    <Setting Name="macro_7_value" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="macro_8_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Макрос 8</Value>
+    </Setting>
+    <Setting Name="macro_8_value" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="macro_9_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Макрос 9</Value>
+    </Setting>
+    <Setting Name="macro_9_value" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="macro_10_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Макрос 10</Value>
+    </Setting>
+    <Setting Name="macro_10_value" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="macro_11_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Макрос 11</Value>
+    </Setting>
+    <Setting Name="macro_11_value" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="macro_12_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Макрос 12</Value>
+    </Setting>
+    <Setting Name="macro_12_value" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="macro_13_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Макрос 13</Value>
+    </Setting>
+    <Setting Name="macro_13_value" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="macro_14_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Макрос 14</Value>
+    </Setting>
+    <Setting Name="macro_14_value" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="macro_15_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Макрос 15</Value>
+    </Setting>
+    <Setting Name="macro_15_value" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="macro_2_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Макрос 2</Value>
+    </Setting>
+    <Setting Name="macro_3_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Макрос 3</Value>
+    </Setting>
+    <Setting Name="macro_4_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Макрос 4</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

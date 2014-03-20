@@ -150,6 +150,7 @@ namespace minecraft_server_gui
                 admin.Left = this.Left + this.Width;
                 admin.Top = this.Top;
                 admin.Owner = this;
+                Properties.Settings.Default.IsAdminConsoleActive = true;
                 admin.Show();
             }
             else
