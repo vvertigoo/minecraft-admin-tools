@@ -95,5 +95,11 @@
     <Setting Name="macro_4_name" Type="System.String" Scope="User">
       <Value Profile="(Default)">Макрос 4</Value>
     </Setting>
+    <Setting Name="RAM_Min" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1024</Value>
+    </Setting>
+    <Setting Name="RAM_Max" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1024</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

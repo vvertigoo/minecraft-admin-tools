@@ -4,7 +4,7 @@
         Title="Настройки макросов" Height="300" Width="300" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="Chrisl21-Minecraft-3D-Grass.ico">
     <Grid>
         <Button x:Name="Button_Admin_Settings_Close" Content="Закрыть" HorizontalAlignment="Left" Margin="197,229,0,0" VerticalAlignment="Top" Width="75" Click="Button_Admin_Settings_Close_Click"/>
-        <Button x:Name="Button_Admin_Settings_Save" Content="Сохранить" HorizontalAlignment="Left" Margin="22,229,0,0" VerticalAlignment="Top" Width="75" Click="Button_Admin_Settings_Save_Click"/>
+        <Button x:Name="Button_Admin_Settings_Save" Content="Сохранить" HorizontalAlignment="Left" Margin="22,229,0,0" VerticalAlignment="Top" Width="75" Click="Button_Admin_Settings_Save_Click" IsDefault="True"/>
         <ComboBox x:Name="Combo_Admin_Settings_MacroSelect" HorizontalAlignment="Left" Margin="152,19,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Combo_Admin_Settings_MacroSelect_SelectionChanged">
             <ComboBoxItem Content="1" IsSelected="True"/>
             <ComboBoxItem Content="2"/>
@@ -23,8 +23,8 @@
             <ComboBoxItem Content="15"/>
         </ComboBox>
         <Label Content="Макрос" HorizontalAlignment="Left" Margin="22,19,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TextBox_Admin_Settings_Name" HorizontalAlignment="Left" Height="23" Margin="152,60,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="TextBox_Admin_Settings_Command" HorizontalAlignment="Left" Height="23" Margin="152,103,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TextBox_Admin_Settings_Name" HorizontalAlignment="Left" Height="23" Margin="90,60,0,0" VerticalAlignment="Top" Width="182"/>
+        <TextBox x:Name="TextBox_Admin_Settings_Command" HorizontalAlignment="Left" Height="23" Margin="90,103,0,0" VerticalAlignment="Top" Width="182"/>
         <Label Content="Название" HorizontalAlignment="Left" Margin="22,60,0,0" VerticalAlignment="Top"/>
         <Label Content="Команда" HorizontalAlignment="Left" Margin="22,103,0,0" VerticalAlignment="Top"/>
     </Grid>

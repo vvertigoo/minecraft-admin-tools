@@ -20,11 +20,15 @@ namespace minecraft_server_gui
     public partial class Settings : Window
     {
         string newFileName;
+        bool java_filename_changed;
 
         public Settings()
         {
             InitializeComponent();
             Textbox_Settings_JavaPath.Text = Properties.Settings.Default.java_path;
+            Textbox_Settings_RAM_Min.Text = Properties.Settings.Default.RAM_Min;
+            Textbox_Settings_RAM_Max.Text = Properties.Settings.Default.RAM_Max;
+            java_filename_changed = false;
         }
 
         private void Button_Settings_Close_Click(object sender, RoutedEventArgs e)
@@ -48,12 +52,15 @@ namespace minecraft_server_gui
                 // Open document 
                 newFileName = dlg.FileName;
                 Textbox_Settings_JavaPath.Text = newFileName;
+                java_filename_changed = true;
             }
         }
 
         private void Button_Settings_Save_Click(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.java_path = newFileName;
+            if(java_filename_changed) Properties.Settings.Default.java_path = newFileName;
+            Properties.Settings.Default.RAM_Min = Textbox_Settings_RAM_Min.Text;
+            Properties.Settings.Default.RAM_Max = Textbox_Settings_RAM_Max.Text;
             Properties.Settings.Default.Save();
         }
     }

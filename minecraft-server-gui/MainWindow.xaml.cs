@@ -60,7 +60,7 @@ namespace minecraft_server_gui
             Status_Text.Content = "Запускаем...";
 
             SERVER.StartInfo.FileName = Properties.Settings.Default.java_path;
-            SERVER.StartInfo.Arguments = "-Xmx1024M -Xms1024M -jar minecraft_server.jar nogui";
+            SERVER.StartInfo.Arguments = "-Xmx" + Properties.Settings.Default.RAM_Max + "M -Xms" + Properties.Settings.Default.RAM_Min + "M -jar minecraft_server.jar nogui";
             SERVER.StartInfo.CreateNoWindow = true;
             SERVER.StartInfo.UseShellExecute = false;
             SERVER.StartInfo.RedirectStandardInput = true;

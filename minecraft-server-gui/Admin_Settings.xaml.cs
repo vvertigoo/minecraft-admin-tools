@@ -70,56 +70,56 @@ namespace minecraft_server_gui
         {
             if(this.IsInitialized)
             {
-                TextBox_Admin_Settings_Name.Text = macro_name_temp[ComboSelected];
-                TextBox_Admin_Settings_Command.Text = macro_value_name[ComboSelected];
-                switch (Combo_Admin_Settings_MacroSelect.SelectedValue.ToString())
+                switch (Combo_Admin_Settings_MacroSelect.SelectedIndex)
                 {
-                    case "1":
+                    case 0:
                         ComboSelected = 1;
                         break;
-                    case "2":
+                    case 1:
                         ComboSelected = 2;
                         break;
-                    case "3":
+                    case 2:
                         ComboSelected = 3;
                         break;
-                    case "4":
+                    case 3:
                         ComboSelected = 4;
                         break;
-                    case "5":
+                    case 4:
                         ComboSelected = 5;
                         break;
-                    case "6":
+                    case 5:
                         ComboSelected = 6;
                         break;
-                    case "7":
+                    case 6:
                         ComboSelected = 7;
                         break;
-                    case "8":
+                    case 7:
                         ComboSelected = 8;
                         break;
-                    case "9":
+                    case 8:
                         ComboSelected = 9;
                         break;
-                    case "10":
+                    case 9:
                         ComboSelected = 10;
                         break;
-                    case "11":
+                    case 10:
                         ComboSelected = 11;
                         break;
-                    case "12":
+                    case 11:
                         ComboSelected = 12;
                         break;
-                    case "13":
+                    case 12:
                         ComboSelected = 13;
                         break;
-                    case "14":
+                    case 13:
                         ComboSelected = 14;
                         break;
-                    case "15":
+                    case 14:
                         ComboSelected = 15;
                         break;
                 }
+                TextBox_Admin_Settings_Name.Text = macro_name_temp[ComboSelected-1];
+                TextBox_Admin_Settings_Command.Text = macro_value_name[ComboSelected-1];
             }
         }
 

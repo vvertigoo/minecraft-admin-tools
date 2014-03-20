@@ -8,5 +8,10 @@
         <TextBox x:Name="Textbox_Settings_JavaPath" HorizontalAlignment="Left" Height="23" Margin="19,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="298"/>
         <Button x:Name="Button_Settings_More" Content="..." HorizontalAlignment="Left" Margin="322,36,0,0" VerticalAlignment="Top" Width="23" Click="Button_Settings_More_Click"/>
         <Label Content="Путь к java.exe" HorizontalAlignment="Left" Margin="19,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Лимит оперативной памяти, MB" HorizontalAlignment="Left" Margin="19,84,0,0" VerticalAlignment="Top"/>
+        <Label Content="Min" HorizontalAlignment="Left" Margin="19,115,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="Textbox_Settings_RAM_Min" HorizontalAlignment="Left" Height="23" Margin="54,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="60"/>
+        <Label Content="Max" HorizontalAlignment="Left" Margin="152,115,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="Textbox_Settings_RAM_Max" HorizontalAlignment="Left" Height="23" Margin="187,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="60"/>
     </Grid>
 </Window>

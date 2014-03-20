@@ -398,5 +398,29 @@ namespace minecraft_server_gui.Properties {
                 this["macro_4_name"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1024")]
+        public string RAM_Min {
+            get {
+                return ((string)(this["RAM_Min"]));
+            }
+            set {
+                this["RAM_Min"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1024")]
+        public string RAM_Max {
+            get {
+                return ((string)(this["RAM_Max"]));
+            }
+            set {
+                this["RAM_Max"] = value;
+            }
+        }
     }
 }

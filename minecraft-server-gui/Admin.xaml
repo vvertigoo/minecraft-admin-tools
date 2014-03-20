@@ -8,21 +8,21 @@
         <Button x:Name="Button_Admin_Close" Content="Закрыть" HorizontalAlignment="Left" Margin="197,280,0,0" VerticalAlignment="Top" Width="75" Click="Button_Admin_Close_Click"/>
         <Separator HorizontalAlignment="Left" Height="8" Margin="0,39,0,0" VerticalAlignment="Top" Width="292" Background="#FFB0B0B0"/>
         <Separator HorizontalAlignment="Left" Height="7" Margin="2,259,0,0" VerticalAlignment="Top" Width="292" Background="#FFB0B0B0"/>
-        <Button x:Name="Button_Admin_Macro1" Content="" HorizontalAlignment="Left" Margin="17,66,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="Button_Admin_Macro2" Content="" HorizontalAlignment="Left" Margin="107,66,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="Button_Admin_Macro3" Content="" HorizontalAlignment="Left" Margin="197,66,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="Button_Admin_Macro4" Content="" HorizontalAlignment="Left" Margin="17,103,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="Button_Admin_Macro5" Content="" HorizontalAlignment="Left" Margin="107,103,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="Button_Admin_Macro6" Content="" HorizontalAlignment="Left" Margin="197,103,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="Button_Admin_Macro7" Content="" HorizontalAlignment="Left" Margin="17,139,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="Button_Admin_Macro8" Content="" HorizontalAlignment="Left" Margin="107,139,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="Button_Admin_Macro9" Content="" HorizontalAlignment="Left" Margin="197,139,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="Button_Admin_Macro10" Content="" HorizontalAlignment="Left" Margin="17,175,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="Button_Admin_Macro11" Content="" HorizontalAlignment="Left" Margin="107,175,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="Button_Admin_Macro12" Content="" HorizontalAlignment="Left" Margin="197,175,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="Button_Admin_Macro13" Content="" HorizontalAlignment="Left" Margin="17,212,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="Button_Admin_Macro14" Content="" HorizontalAlignment="Left" Margin="107,212,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="Button_Admin_Macro15" Content="" HorizontalAlignment="Left" Margin="197,212,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="Button_Admin_Macro1" Content="" HorizontalAlignment="Left" Margin="17,66,0,0" VerticalAlignment="Top" Width="75" Click="Button_Admin_Macro1_Click"/>
+        <Button x:Name="Button_Admin_Macro2" Content="" HorizontalAlignment="Left" Margin="107,66,0,0" VerticalAlignment="Top" Width="75" Click="Button_Admin_Macro2_Click"/>
+        <Button x:Name="Button_Admin_Macro3" Content="" HorizontalAlignment="Left" Margin="197,66,0,0" VerticalAlignment="Top" Width="75" Click="Button_Admin_Macro3_Click"/>
+        <Button x:Name="Button_Admin_Macro4" Content="" HorizontalAlignment="Left" Margin="17,103,0,0" VerticalAlignment="Top" Width="75" Click="Button_Admin_Macro4_Click"/>
+        <Button x:Name="Button_Admin_Macro5" Content="" HorizontalAlignment="Left" Margin="107,103,0,0" VerticalAlignment="Top" Width="75" Click="Button_Admin_Macro5_Click"/>
+        <Button x:Name="Button_Admin_Macro6" Content="" HorizontalAlignment="Left" Margin="197,103,0,0" VerticalAlignment="Top" Width="75" Click="Button_Admin_Macro6_Click"/>
+        <Button x:Name="Button_Admin_Macro7" Content="" HorizontalAlignment="Left" Margin="17,139,0,0" VerticalAlignment="Top" Width="75" Click="Button_Admin_Macro7_Click"/>
+        <Button x:Name="Button_Admin_Macro8" Content="" HorizontalAlignment="Left" Margin="107,139,0,0" VerticalAlignment="Top" Width="75" Click="Button_Admin_Macro8_Click"/>
+        <Button x:Name="Button_Admin_Macro9" Content="" HorizontalAlignment="Left" Margin="197,139,0,0" VerticalAlignment="Top" Width="75" Click="Button_Admin_Macro9_Click"/>
+        <Button x:Name="Button_Admin_Macro10" Content="" HorizontalAlignment="Left" Margin="17,175,0,0" VerticalAlignment="Top" Width="75" Click="Button_Admin_Macro10_Click"/>
+        <Button x:Name="Button_Admin_Macro11" Content="" HorizontalAlignment="Left" Margin="107,175,0,0" VerticalAlignment="Top" Width="75" Click="Button_Admin_Macro11_Click"/>
+        <Button x:Name="Button_Admin_Macro12" Content="" HorizontalAlignment="Left" Margin="197,175,0,0" VerticalAlignment="Top" Width="75" Click="Button_Admin_Macro12_Click"/>
+        <Button x:Name="Button_Admin_Macro13" Content="" HorizontalAlignment="Left" Margin="17,212,0,0" VerticalAlignment="Top" Width="75" Click="Button_Admin_Macro13_Click"/>
+        <Button x:Name="Button_Admin_Macro14" Content="" HorizontalAlignment="Left" Margin="107,212,0,0" VerticalAlignment="Top" Width="75" Click="Button_Admin_Macro14_Click"/>
+        <Button x:Name="Button_Admin_Macro15" Content="" HorizontalAlignment="Left" Margin="197,212,0,0" VerticalAlignment="Top" Width="75" Click="Button_Admin_Macro15_Click"/>
         <Button x:Name="Button_Admin_Settings" Content="Макросы" HorizontalAlignment="Left" Margin="17,280,0,0" VerticalAlignment="Top" Width="75" Click="Button_Admin_Settings_Click"/>
 
     </Grid>
