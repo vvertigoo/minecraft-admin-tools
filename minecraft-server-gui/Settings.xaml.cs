@@ -33,6 +33,7 @@ namespace minecraft_server_gui
 
         private void Button_Settings_Close_Click(object sender, RoutedEventArgs e)
         {
+            Properties.Settings.Default.IsSettingsWindowActive = false;
             this.Close();
         }
 

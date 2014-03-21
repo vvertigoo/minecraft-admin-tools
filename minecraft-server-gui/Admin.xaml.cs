@@ -51,7 +51,7 @@ namespace minecraft_server_gui
 
         private void Button_Admin_Close_Click(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.IsAdminConsoleActive = false;
+            Properties.Settings.Default.IsAdminWindowActive = false;
             this.Close();
         }
 
@@ -63,8 +63,13 @@ namespace minecraft_server_gui
 
         private void Button_Admin_Settings_Click(object sender, RoutedEventArgs e)
         {
-            admin_settings = new Admin_Settings();
-            admin_settings.Show();
+            if (!Properties.Settings.Default.IsAdminSettingsWindowActive)
+            {
+                admin_settings = new Admin_Settings();
+                Properties.Settings.Default.IsAdminSettingsWindowActive = true;
+                admin_settings.Show();
+            }
+            else admin_settings.Activate();
         }
 
         private void PlaceMacro(string macro)

@@ -3,12 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Игроки" Height="250" Width="525" ResizeMode="NoResize" WindowStartupLocation="Manual" Icon="Chrisl21-Minecraft-3D-Grass.ico">
     <Grid>
-        <Button x:Name="Button_players_close" Content="Закрыть" HorizontalAlignment="Left" Margin="424,180,0,0" VerticalAlignment="Top" Width="75" Click="Button_players_close_Click"/>
-        <ListBox x:Name="List_Players" HorizontalAlignment="Left" Height="183" Margin="20,19,0,0" VerticalAlignment="Top" Width="145" ScrollViewer.VerticalScrollBarVisibility="Visible" />
-        <Button x:Name="Button_Players_Kick" Content="Кик" HorizontalAlignment="Left" Margin="201,19,0,0" VerticalAlignment="Top" Width="130"/>
-        <Button x:Name="Button_Players_Ban" Content="Бан" HorizontalAlignment="Left" Margin="369,19,0,0" VerticalAlignment="Top" Width="130"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="201,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174"/>
-        <Button Content="Написать в личку" HorizontalAlignment="Left" Margin="380,57,0,0" VerticalAlignment="Top" Width="119"/>
+        <Button x:Name="Button_Players_Close" Content="Закрыть" HorizontalAlignment="Left" Margin="424,180,0,0" VerticalAlignment="Top" Width="75" Click="Button_Players_Close_Click"/>
+        <ListBox x:Name="List_Players" HorizontalAlignment="Left" Height="183" Margin="20,19,0,0" VerticalAlignment="Top" Width="145" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionChanged="List_Players_SelectionChanged"/>
+        <Button x:Name="Button_Players_Kick" Content="Кик" HorizontalAlignment="Left" Margin="201,19,0,0" VerticalAlignment="Top" Width="130" Click="Button_Players_Kick_Click"/>
+        <Button x:Name="Button_Players_Ban" Content="Бан" HorizontalAlignment="Left" Margin="369,19,0,0" VerticalAlignment="Top" Width="130" Click="Button_Players_Ban_Click"/>
+        <TextBox x:Name="Textbox_Players_Message" HorizontalAlignment="Left" Height="23" Margin="201,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174"/>
+        <Button x:Name="Button_Players_Message_Send" Content="Написать в личку" HorizontalAlignment="Left" Margin="380,57,0,0" VerticalAlignment="Top" Width="119" Click="Button_Players_Message_Send_Click"/>
 
     </Grid>
 </Window>

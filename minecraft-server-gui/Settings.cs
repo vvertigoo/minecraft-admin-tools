@@ -11,8 +11,10 @@ namespace minecraft_server_gui.Properties {
     internal sealed partial class Settings {
 
         public UpdateMacrosNames UpdateMacrosNamesMethod;
-        public bool IsAdminConsoleActive;
+        public bool IsAdminWindowActive;
+        public bool IsAdminSettingsWindowActive;
         public bool IsPlayerWindowActive;
+        public bool IsSettingsWindowActive;
         public List<string> PlayerNames;
         
         public Settings() {
@@ -21,7 +23,10 @@ namespace minecraft_server_gui.Properties {
             // this.SettingChanging += this.SettingChangingEventHandler;
             //
             this.SettingsSaving += this.SettingsSavingEventHandler;
+            IsAdminWindowActive = false;
+            IsAdminSettingsWindowActive = false;
             IsPlayerWindowActive = false;
+            IsSettingsWindowActive = false;
             PlayerNames = new List<string>();
             //
         }
@@ -31,7 +36,7 @@ namespace minecraft_server_gui.Properties {
         }
         
         private void SettingsSavingEventHandler(object sender, System.ComponentModel.CancelEventArgs e) {
-            if (IsAdminConsoleActive)
+            if (IsAdminWindowActive)
             {
                 UpdateMacrosNamesMethod();
             }

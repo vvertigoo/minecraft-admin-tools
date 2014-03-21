@@ -30,6 +30,7 @@ namespace minecraft_server_gui
         private Thread t;
         private Admin admin;
         private Players players;
+        private Settings settings;
         private byte playersOnline;
         
         public bool ServerIsRunning;
@@ -38,7 +39,7 @@ namespace minecraft_server_gui
         public MainWindow()
         {
             InitializeComponent();
-            Properties.Settings.Default.IsAdminConsoleActive = false;
+            Properties.Settings.Default.IsAdminWindowActive = false;
             Properties.Settings.Default.IsPlayerWindowActive = false;
             ServerIsRunning = false;
             ServerShutdown = false;
@@ -46,6 +47,9 @@ namespace minecraft_server_gui
             Textbox_Log.TextWrapping = TextWrapping.Wrap;
             Textbox_Log.AcceptsReturn = true;
             Textbox_Log.IsReadOnly = true;
+            Button_Admin.IsEnabled = false;
+            Button_Players.IsEnabled = false;
+            Button_Send.IsEnabled = false;
             playersOnline = 0;
             UpdatePlayersOnline();
         }
@@ -93,6 +97,9 @@ namespace minecraft_server_gui
         private void Button_Stop_Click(object sender, RoutedEventArgs e)
         {
             Button_Stop.IsEnabled = false;
+            Button_Admin.IsEnabled = false;
+            Button_Players.IsEnabled = false;
+            Button_Send.IsEnabled = false;
             if (SERVER.Responding)
             {
                 SERVER_INPUT.WriteLine("/stop");
@@ -103,8 +110,13 @@ namespace minecraft_server_gui
 
         private void Button_Settings_Click(object sender, RoutedEventArgs e)
         {
-            Settings settings = new Settings();
-            settings.Show();
+            if (!Properties.Settings.Default.IsSettingsWindowActive)
+            {
+                settings = new Settings();
+                Properties.Settings.Default.IsSettingsWindowActive = true;
+                settings.Show();
+            }
+            else settings.Activate();
         }
 
         private void Button_Send_Click(object sender, RoutedEventArgs e)
@@ -148,20 +160,17 @@ namespace minecraft_server_gui
 
         private void Button_Admin_Click(object sender, RoutedEventArgs e)
         {
-            if (ServerIsRunning)
+            if (!Properties.Settings.Default.IsAdminWindowActive)
             {
                 admin = new Admin();
                 admin.SERVER_INPUT = SERVER_INPUT;
                 admin.Left = this.Left + this.Width;
                 admin.Top = this.Top;
                 admin.Owner = this;
-                Properties.Settings.Default.IsAdminConsoleActive = true;
+                Properties.Settings.Default.IsAdminWindowActive = true;
                 admin.Show();
             }
-            else
-            {
-                System.Windows.MessageBox.Show("Нельзя зайти в админ. консоль при выключенном сервере.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            else admin.Activate();
         }
 
         private delegate void Invoker(string arg);
@@ -183,6 +192,10 @@ namespace minecraft_server_gui
                     Button_Stop.IsEnabled = true;
                     ServerIsRunning = true;
                     Status_Text.Content = "Сервер работает.";
+                    UpdatePlayersOnline();
+                    Button_Admin.IsEnabled = true;
+                    Button_Players.IsEnabled = true;
+                    Button_Send.IsEnabled = true;
                 }
             }
             else if (ServerShutdown)
@@ -248,11 +261,12 @@ namespace minecraft_server_gui
             t.Abort();
             Status_ProgressBar.Value = 0.0;
             Status_Text.Content = "Сервер выключен.";
+            UpdatePlayersOnline();
         }
 
         private void Window_LocationChanged(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.IsAdminConsoleActive)
+            if (Properties.Settings.Default.IsAdminWindowActive)
             {
                 admin.Left = this.Left + this.Width;
                 admin.Top = this.Top;
@@ -266,24 +280,23 @@ namespace minecraft_server_gui
 
         private void UpdatePlayersOnline()
         {
-            Status_Players_Online.Content = "Игроков онлайн: " + Convert.ToString(playersOnline);
+            if (ServerIsRunning) Status_Players_Online.Content = "Игроков онлайн: " + Convert.ToString(playersOnline);
+            else Status_Players_Online.Content = "Игроков онлайн: -";
         }
 
         private void Button_Players_Click(object sender, RoutedEventArgs e)
         {
-            if (ServerIsRunning)
+            if (Properties.Settings.Default.IsPlayerWindowActive)
             {
                 players = new Players();
                 players.Left = this.Left;
                 players.Top = this.Top + this.Height;
                 players.Owner = this;
                 Properties.Settings.Default.IsPlayerWindowActive = true;
+                players.SERVER_INPUT = SERVER_INPUT;
                 players.Show();
             }
-            else
-            {
-                System.Windows.MessageBox.Show("Игроки при выключенном сервере? Ты серьёзно?", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            else players.Activate();
         }
     }
 }
