@@ -16,6 +16,9 @@ To use it you need follow this simple steps:
 ## Changelog:
 --------------------------------------------------------------
 
+### v0.3.1
+* Players screen hotfix
+
 ### v0.3
 * Added "Players" window
 * Fixed Issue #6

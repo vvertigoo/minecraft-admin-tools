@@ -286,7 +286,7 @@ namespace minecraft_server_gui
 
         private void Button_Players_Click(object sender, RoutedEventArgs e)
         {
-            if (Properties.Settings.Default.IsPlayerWindowActive)
+            if (!Properties.Settings.Default.IsPlayerWindowActive)
             {
                 players = new Players();
                 players.Left = this.Left;

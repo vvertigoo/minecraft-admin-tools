@@ -69,7 +69,7 @@ namespace minecraft_server_gui
                 Properties.Settings.Default.IsAdminSettingsWindowActive = true;
                 admin_settings.Show();
             }
-            else admin_settings.Activate();
+            else if (admin_settings.IsInitialized) admin_settings.Activate();
         }
 
         private void PlaceMacro(string macro)

@@ -7,7 +7,7 @@ using System.Windows;
 // Управление общими сведениями о сборке осуществляется с помощью 
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("Minecraft Server GUI v0.3")]
+[assembly: AssemblyTitle("Minecraft Server GUI v0.3.1")]
 [assembly: AssemblyDescription("Minecraft server admin tool")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("BCV")]
@@ -51,6 +51,6 @@ using System.Windows;
 // Можно задать все значения или принять номера сборки и редакции по умолчанию 
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.3.0.0")]
-[assembly: AssemblyFileVersion("0.3.0.0")]
+[assembly: AssemblyVersion("0.3.1.0")]
+[assembly: AssemblyFileVersion("0.3.1.0")]
 [assembly: NeutralResourcesLanguageAttribute("ru-RU")]
