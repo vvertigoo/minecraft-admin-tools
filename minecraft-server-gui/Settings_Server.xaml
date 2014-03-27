@@ -1,0 +1,75 @@
+﻿<Window x:Name="Settings_Server_Window" x:Class="minecraft_server_gui.Settings_Server"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Настройки сервера" Height="690" Width="685" Closed="Settings_Server_Window_Closed" Icon="Chrisl21-Minecraft-3D-Grass.ico" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Button x:Name="Button_Server_Settings_Close" Content="Закрыть" HorizontalAlignment="Left" Margin="576,620,0,0" VerticalAlignment="Top" Width="75" Click="Button_Server_Settings_Close_Click" ToolTip="hello world"/>
+        <Label Content="generator-settings" HorizontalAlignment="Left" Margin="17,19,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_generator_settings" HorizontalAlignment="Left" Height="23" Margin="139,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="op-permission-level" HorizontalAlignment="Left" Margin="17,56,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_op_permission_level" HorizontalAlignment="Left" Height="23" Margin="139,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="allow-nether" HorizontalAlignment="Left" Margin="17,93,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_allow_nether" HorizontalAlignment="Left" Height="23" Margin="139,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="level-name" HorizontalAlignment="Left" Margin="17,130,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_level_name" HorizontalAlignment="Left" Height="23" Margin="139,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="enable-query" HorizontalAlignment="Left" Margin="17,167,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_enable_query" HorizontalAlignment="Left" Height="23" Margin="139,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="allow-flight" HorizontalAlignment="Left" Margin="17,204,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_allow_flight" HorizontalAlignment="Left" Height="23" Margin="139,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="announce-player-ac.." HorizontalAlignment="Left" Margin="17,241,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_announce_player_achievements" HorizontalAlignment="Left" Height="23" Margin="139,241,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="server-port" HorizontalAlignment="Left" Margin="17,278,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_server_port" HorizontalAlignment="Left" Height="23" Margin="139,278,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="level-type" HorizontalAlignment="Left" Margin="17,315,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_level_type" HorizontalAlignment="Left" Height="23" Margin="139,315,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="enable-rcon" HorizontalAlignment="Left" Margin="17,352,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_enable_rcon" HorizontalAlignment="Left" Height="23" Margin="139,352,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="force-gamemode" HorizontalAlignment="Left" Margin="17,389,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_force_gamemode" HorizontalAlignment="Left" Height="23" Margin="139,389,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="level-seed" HorizontalAlignment="Left" Margin="17,426,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_level_seed" HorizontalAlignment="Left" Height="23" Margin="139,426,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="server-ip" HorizontalAlignment="Left" Margin="17,463,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_server_ip" HorizontalAlignment="Left" Height="23" Margin="139,463,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="max-build-height" HorizontalAlignment="Left" Margin="17,500,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_max_build_height" HorizontalAlignment="Left" Height="23" Margin="139,500,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="spawn-npcs" HorizontalAlignment="Left" Margin="17,538,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_spawn_npcs" HorizontalAlignment="Left" Height="23" Margin="139,538,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="white-list" HorizontalAlignment="Left" Margin="17,575,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_white_list" HorizontalAlignment="Left" Height="23" Margin="139,575,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="spawn-animals" HorizontalAlignment="Left" Margin="348,19,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_spawn_animals" HorizontalAlignment="Left" Height="23" Margin="470,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="snooper-enabled" HorizontalAlignment="Left" Margin="348,56,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_snooper_enabled" HorizontalAlignment="Left" Height="23" Margin="470,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="hardcore" HorizontalAlignment="Left" Margin="348,93,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_hardcore" HorizontalAlignment="Left" Height="23" Margin="470,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="online-mode" HorizontalAlignment="Left" Margin="348,130,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_online_mode" HorizontalAlignment="Left" Height="23" Margin="470,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="resource-pack" HorizontalAlignment="Left" Margin="348,167,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_resource_pack" HorizontalAlignment="Left" Height="23" Margin="470,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="pvp" HorizontalAlignment="Left" Margin="348,204,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_pvp" HorizontalAlignment="Left" Height="23" Margin="470,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="difficulty" HorizontalAlignment="Left" Margin="348,241,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_difficulty" HorizontalAlignment="Left" Height="23" Margin="470,241,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="enable-command-b.." HorizontalAlignment="Left" Margin="348,278,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_enable_command_block" HorizontalAlignment="Left" Height="23" Margin="470,278,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="player-idle-timeout" HorizontalAlignment="Left" Margin="348,315,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_player_idle_timeout" HorizontalAlignment="Left" Height="23" Margin="470,315,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="gamemode" HorizontalAlignment="Left" Margin="348,352,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_gamemode" HorizontalAlignment="Left" Height="23" Margin="470,352,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="max-players" HorizontalAlignment="Left" Margin="348,389,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_max_players" HorizontalAlignment="Left" Height="23" Margin="470,389,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="spawn-monsters" HorizontalAlignment="Left" Margin="348,426,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_spawn_monsters" HorizontalAlignment="Left" Height="23" Margin="470,426,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="view-distance" HorizontalAlignment="Left" Margin="348,463,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_view_distance" HorizontalAlignment="Left" Height="23" Margin="470,463,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="generate-structures" HorizontalAlignment="Left" Margin="348,500,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_generate_structures" HorizontalAlignment="Left" Height="23" Margin="470,500,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="spawn-protection" HorizontalAlignment="Left" Margin="348,537,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_spawn_protection" HorizontalAlignment="Left" Height="23" Margin="470,537,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Label Content="motd" HorizontalAlignment="Left" Margin="348,575,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_motd" HorizontalAlignment="Left" Height="23" Margin="470,575,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <Button x:Name="Button_Settings_Server_Save" Content="Сохранить" HorizontalAlignment="Left" Margin="17,620,0,0" VerticalAlignment="Top" Width="75" Click="Button_Settings_Server_Save_Click"/>
+        <Button x:Name="Button_Settings_Server_Help" Content="Помощь" HorizontalAlignment="Left" Margin="487,620,0,0" VerticalAlignment="Top" Width="75" Click="Button_Settings_Server_Help_Click"/>
+
+    </Grid>
+</Window>

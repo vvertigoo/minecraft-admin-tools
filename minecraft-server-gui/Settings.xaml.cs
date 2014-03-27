@@ -22,6 +22,8 @@ namespace minecraft_server_gui
         string newFileName;
         bool java_filename_changed;
 
+        Settings_Server settings_server;
+
         public Settings()
         {
             InitializeComponent();
@@ -63,6 +65,17 @@ namespace minecraft_server_gui
             Properties.Settings.Default.RAM_Min = Textbox_Settings_RAM_Min.Text;
             Properties.Settings.Default.RAM_Max = Textbox_Settings_RAM_Max.Text;
             Properties.Settings.Default.Save();
+        }
+
+        private void Button_Settings_Server_Click(object sender, RoutedEventArgs e)
+        {
+            if (!Properties.Settings.Default.IsSettingsServerWindowActive)
+            {
+                settings_server = new Settings_Server();
+                Properties.Settings.Default.IsSettingsServerWindowActive = true;
+                settings_server.Show();
+            }
+            else settings_server.Activate();
         }
     }
 }

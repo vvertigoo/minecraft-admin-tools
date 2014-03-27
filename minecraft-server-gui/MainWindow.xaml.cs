@@ -33,16 +33,15 @@ namespace minecraft_server_gui
         private Settings settings;
         private byte playersOnline;
         
-        public bool ServerIsRunning;
-        public bool ServerShutdown;
+        public bool IsServerShutdown;
 
         public MainWindow()
         {
             InitializeComponent();
             Properties.Settings.Default.IsAdminWindowActive = false;
             Properties.Settings.Default.IsPlayerWindowActive = false;
-            ServerIsRunning = false;
-            ServerShutdown = false;
+            Properties.Settings.Default.IsServerRunning = false;
+            IsServerShutdown = false;
             SERVER = new Process();
             Textbox_Log.TextWrapping = TextWrapping.Wrap;
             Textbox_Log.AcceptsReturn = true;
@@ -56,9 +55,9 @@ namespace minecraft_server_gui
 
         private void Button_Exit_Click(object sender, RoutedEventArgs e)
         {
-            if (ServerIsRunning)
+            if (Properties.Settings.Default.IsServerRunning)
             {
-                System.Windows.MessageBox.Show("Нельзя выйти из программы при работающем сервере.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show("Нельзя выйти из программы при работающем сервере.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
@@ -97,7 +96,7 @@ namespace minecraft_server_gui
             }
             else 
             {
-                System.Windows.MessageBox.Show("Не могу найти файлы java.exe и/или minecraft_server.exe.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show("Не могу найти файлы java.exe и/или minecraft_server.exe.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 Button_Start.IsEnabled = true;
                 Status_Text.Content = "Сервер не работает.";
             }
@@ -114,7 +113,7 @@ namespace minecraft_server_gui
                 SERVER_INPUT.WriteLine("/stop");
             }
             else SERVER.Kill();
-            ServerShutdown = true;
+            IsServerShutdown = true;
         }
 
         private void Button_Settings_Click(object sender, RoutedEventArgs e)
@@ -130,7 +129,7 @@ namespace minecraft_server_gui
 
         private void Button_Send_Click(object sender, RoutedEventArgs e)
         {
-            if (ServerIsRunning)
+            if (Properties.Settings.Default.IsServerRunning)
             {
                 SERVER_INPUT.WriteLine("/tellraw @a {text:\"[ADMIN] " + Textbox_Send.Text + "\",color:green,bold:true}");
                 Textbox_Log.ScrollToEnd();
@@ -156,7 +155,7 @@ namespace minecraft_server_gui
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (ServerIsRunning)
+            if (Properties.Settings.Default.IsServerRunning)
             {
                 t.Abort();
                 if (SERVER.Responding)
@@ -186,7 +185,7 @@ namespace minecraft_server_gui
 
         private void PrintLogMessage(string arg)
         {
-            if (!ServerIsRunning)
+            if (!Properties.Settings.Default.IsServerRunning)
             {
                 if (arg.Contains("Starting minecraft server version")) Status_ProgressBar.Value = 25.0;
                 else if (arg.Contains("Loading properties")) Status_ProgressBar.Value = 45.0;
@@ -199,7 +198,7 @@ namespace minecraft_server_gui
                 {
                     Status_ProgressBar.Value = 0.0;
                     Button_Stop.IsEnabled = true;
-                    ServerIsRunning = true;
+                    Properties.Settings.Default.IsServerRunning = true;
                     Status_Text.Content = "Сервер работает.";
                     UpdatePlayersOnline();
                     Button_Admin.IsEnabled = true;
@@ -207,7 +206,7 @@ namespace minecraft_server_gui
                     Button_Send.IsEnabled = true;
                 }
             }
-            else if (ServerShutdown)
+            else if (IsServerShutdown)
             {
                 Status_Text.Content = "Выключаем...";
                 Status_ProgressBar.Value = 50.0;
@@ -265,8 +264,8 @@ namespace minecraft_server_gui
                 }
             }
             Button_Start.IsEnabled = true;
-            ServerIsRunning = false;
-            ServerShutdown = false;
+            Properties.Settings.Default.IsServerRunning = false;
+            IsServerShutdown = false;
             t.Abort();
             Status_ProgressBar.Value = 0.0;
             Status_Text.Content = "Сервер выключен.";
@@ -289,7 +288,7 @@ namespace minecraft_server_gui
 
         private void UpdatePlayersOnline()
         {
-            if (ServerIsRunning) Status_Players_Online.Content = "Игроков онлайн: " + Convert.ToString(playersOnline);
+            if (Properties.Settings.Default.IsServerRunning) Status_Players_Online.Content = "Игроков онлайн: " + Convert.ToString(playersOnline);
             else Status_Players_Online.Content = "Игроков онлайн: -";
         }
 

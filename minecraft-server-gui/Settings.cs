@@ -15,6 +15,8 @@ namespace minecraft_server_gui.Properties {
         public bool IsAdminSettingsWindowActive;
         public bool IsPlayerWindowActive;
         public bool IsSettingsWindowActive;
+        public bool IsSettingsServerWindowActive;
+        public bool IsServerRunning;
         public List<string> PlayerNames;
         
         public Settings() {
@@ -27,6 +29,8 @@ namespace minecraft_server_gui.Properties {
             IsAdminSettingsWindowActive = false;
             IsPlayerWindowActive = false;
             IsSettingsWindowActive = false;
+            IsSettingsServerWindowActive = false;
+            IsServerRunning = false;
             PlayerNames = new List<string>();
             //
         }
