@@ -16,6 +16,9 @@ To use it you need follow this simple steps:
 ## Changelog:
 --------------------------------------------------------------
 
+### v0.3.2
+* Fix starting server procedure without checking on files existence.
+
 ### v0.3.1
 * Players screen hotfix
 

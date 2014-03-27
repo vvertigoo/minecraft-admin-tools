@@ -71,26 +71,35 @@ namespace minecraft_server_gui
             Button_Start.IsEnabled = false;
             Status_Text.Content = "Запускаем...";
 
-            SERVER.StartInfo.FileName = Properties.Settings.Default.java_path;
-            SERVER.StartInfo.Arguments = "-Xmx" + Properties.Settings.Default.RAM_Max + "M -Xms" + Properties.Settings.Default.RAM_Min + "M -jar minecraft_server.jar nogui";
-            SERVER.StartInfo.CreateNoWindow = true;
-            SERVER.StartInfo.UseShellExecute = false;
-            SERVER.StartInfo.RedirectStandardInput = true;
-            SERVER.StartInfo.RedirectStandardOutput = true;
-            Status_ProgressBar.Value = 3.0;
-
-            if (SERVER.Start())
+            if (File.Exists(Properties.Settings.Default.java_path) && Properties.Settings.Default.java_path.Contains("java.exe") && File.Exists("minecraft_server.jar"))
             {
-                Status_ProgressBar.Value = 5.0;
-                SERVER_INPUT = SERVER.StandardInput;
-                SERVER_OUTPUT = SERVER.StandardOutput;
+                SERVER.StartInfo.FileName = Properties.Settings.Default.java_path;
+                SERVER.StartInfo.Arguments = "-Xmx" + Properties.Settings.Default.RAM_Max + "M -Xms" + Properties.Settings.Default.RAM_Min + "M -jar minecraft_server.jar nogui";
+                SERVER.StartInfo.CreateNoWindow = true;
+                SERVER.StartInfo.UseShellExecute = false;
+                SERVER.StartInfo.RedirectStandardInput = true;
+                SERVER.StartInfo.RedirectStandardOutput = true;
+                Status_ProgressBar.Value = 3.0;
 
-                Status_ProgressBar.Value = 10.0;
-                t = new Thread(new ThreadStart(GetLogMessage));
-                t.Name = "Server output reader";
-                t.Start();
+                if (SERVER.Start())
+                {
+                    Status_ProgressBar.Value = 5.0;
+                    SERVER_INPUT = SERVER.StandardInput;
+                    SERVER_OUTPUT = SERVER.StandardOutput;
 
-                Status_ProgressBar.Value = 15.0;
+                    Status_ProgressBar.Value = 10.0;
+                    t = new Thread(new ThreadStart(GetLogMessage));
+                    t.Name = "Server output reader";
+                    t.Start();
+
+                    Status_ProgressBar.Value = 15.0;
+                }
+            }
+            else 
+            {
+                System.Windows.MessageBox.Show("Не могу найти файлы java.exe и/или minecraft_server.exe.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                Button_Start.IsEnabled = true;
+                Status_Text.Content = "Сервер не работает.";
             }
         }
 
