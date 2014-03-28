@@ -16,6 +16,10 @@ To use it you need follow this simple steps:
 ## Changelog:
 --------------------------------------------------------------
 
+### v0.4
+* New feature: server preferences editor
+* Bug fixes: some bugs with windows and taskbar
+
 ### v0.3.2
 * Fix starting server procedure without checking on files existence.
 
