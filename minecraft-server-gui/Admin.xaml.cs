@@ -51,7 +51,6 @@ namespace minecraft_server_gui
 
         private void Button_Admin_Close_Click(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.IsAdminWindowActive = false;
             this.Close();
         }
 
@@ -66,8 +65,10 @@ namespace minecraft_server_gui
             if (!Properties.Settings.Default.IsAdminSettingsWindowActive)
             {
                 admin_settings = new Admin_Settings();
+                admin_settings.ShowInTaskbar = false;
+                admin_settings.Owner = this;
                 Properties.Settings.Default.IsAdminSettingsWindowActive = true;
-                admin_settings.Show();
+                admin_settings.ShowDialog();
             }
             else if (admin_settings.IsInitialized) admin_settings.Activate();
         }
@@ -153,5 +154,11 @@ namespace minecraft_server_gui
             PlaceMacro(Properties.Settings.Default.macro_15_value);
         }
         #endregion
+
+        private void Window_Admin_Closed(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.IsAdminWindowActive = false;
+            this.Owner.Activate();
+        }
     }
 }

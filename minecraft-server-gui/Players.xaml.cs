@@ -34,7 +34,6 @@ namespace minecraft_server_gui
 
         private void Button_Players_Close_Click(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.IsPlayerWindowActive = false;
             this.Close();
         }
 
@@ -59,6 +58,12 @@ namespace minecraft_server_gui
             Button_Players_Ban.IsEnabled = true;
             Button_Players_Kick.IsEnabled = true;
             Button_Players_Message_Send.IsEnabled = true;
+        }
+
+        private void Window_Players_Closed(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.IsPlayerWindowActive = false;
+            this.Owner.Activate();
         }
     }
 }

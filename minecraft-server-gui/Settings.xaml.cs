@@ -35,7 +35,6 @@ namespace minecraft_server_gui
 
         private void Button_Settings_Close_Click(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.IsSettingsWindowActive = false;
             this.Close();
         }
 
@@ -72,10 +71,18 @@ namespace minecraft_server_gui
             if (!Properties.Settings.Default.IsSettingsServerWindowActive)
             {
                 settings_server = new Settings_Server();
+                settings_server.Owner = this;
+                settings_server.ShowInTaskbar = false;
                 Properties.Settings.Default.IsSettingsServerWindowActive = true;
-                settings_server.Show();
+                settings_server.ShowDialog();
             }
             else settings_server.Activate();
+        }
+
+        private void Window_Settings_Closed(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.IsSettingsWindowActive = false;
+            this.Owner.Activate();
         }
     }
 }

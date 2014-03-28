@@ -121,8 +121,10 @@ namespace minecraft_server_gui
             if (!Properties.Settings.Default.IsSettingsWindowActive)
             {
                 settings = new Settings();
+                settings.Owner = this;
+                settings.ShowInTaskbar = false;
                 Properties.Settings.Default.IsSettingsWindowActive = true;
-                settings.Show();
+                settings.ShowDialog();
             }
             else settings.Activate();
         }
@@ -175,6 +177,7 @@ namespace minecraft_server_gui
                 admin.Left = this.Left + this.Width;
                 admin.Top = this.Top;
                 admin.Owner = this;
+                admin.ShowInTaskbar = false;
                 Properties.Settings.Default.IsAdminWindowActive = true;
                 admin.Show();
             }
@@ -300,6 +303,7 @@ namespace minecraft_server_gui
                 players.Left = this.Left;
                 players.Top = this.Top + this.Height;
                 players.Owner = this;
+                players.ShowInTaskbar = false;
                 Properties.Settings.Default.IsPlayerWindowActive = true;
                 players.SERVER_INPUT = SERVER_INPUT;
                 players.Show();

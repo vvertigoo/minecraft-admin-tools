@@ -154,6 +154,7 @@ namespace minecraft_server_gui
         private void Settings_Server_Window_Closed(object sender, EventArgs e)
         {
             Properties.Settings.Default.IsSettingsServerWindowActive = false;
+            this.Owner.Activate();
         }
 
         private void Button_Server_Settings_Close_Click(object sender, RoutedEventArgs e)

@@ -125,7 +125,6 @@ namespace minecraft_server_gui
 
         private void Button_Admin_Settings_Close_Click(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.IsAdminSettingsWindowActive = false;
             this.Close();
         }
 
@@ -166,6 +165,12 @@ namespace minecraft_server_gui
             Properties.Settings.Default.macro_15_value = macro_value_name[14];
 
             Properties.Settings.Default.Save();
+        }
+
+        private void Window_Admin_Settings_Closed(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.IsAdminSettingsWindowActive = false;
+            this.Owner.Activate();
         }
     }
 }

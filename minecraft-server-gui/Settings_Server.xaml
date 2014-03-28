@@ -1,4 +1,4 @@
-﻿<Window x:Name="Settings_Server_Window" x:Class="minecraft_server_gui.Settings_Server"
+﻿<Window x:Name="Window_Settings_Server" x:Class="minecraft_server_gui.Settings_Server"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Настройки сервера" Height="690" Width="685" Closed="Settings_Server_Window_Closed" Icon="Chrisl21-Minecraft-3D-Grass.ico" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
