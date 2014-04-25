@@ -111,6 +111,7 @@ namespace minecraft_server_gui
             serverCfgWriter.WriteLine("spawn-protection=" + textbox_spawn_protection.Text);
             serverCfgWriter.WriteLine("motd=" + textbox_motd.Text);
             serverCfgWriter.Close();
+            Properties.Settings.Default.max_players = textbox_max_players.Text;
         }
 
         private void CreateNewCfg()

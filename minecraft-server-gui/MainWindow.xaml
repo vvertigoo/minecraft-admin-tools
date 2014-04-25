@@ -1,7 +1,7 @@
 ﻿<Window x:Class="minecraft_server_gui.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Minecraft Server GUI v0.4" Height="350" Width="525" Icon="Chrisl21-Minecraft-3D-Grass.ico" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Closing="Window_Closing" LocationChanged="Window_LocationChanged">
+        Title="Minecraft Server GUI Dev" Height="350" Width="525" Icon="Chrisl21-Minecraft-3D-Grass.ico" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Closing="Window_Closing" LocationChanged="Window_LocationChanged">
     <Grid>
         <Button x:Name="Button_Exit" Content="Выход" HorizontalAlignment="Left" Margin="423,252,0,0" VerticalAlignment="Top" Width="75" Click="Button_Exit_Click"/>
         <Button x:Name="Button_Start" Content="Запустить сервер" HorizontalAlignment="Left" Margin="10,218,0,0" VerticalAlignment="Top" Width="126" Height="56" Click="Button_Start_Click"/>

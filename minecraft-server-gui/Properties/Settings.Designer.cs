@@ -422,5 +422,17 @@ namespace minecraft_server_gui.Properties {
                 this["RAM_Max"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string max_players {
+            get {
+                return ((string)(this["max_players"]));
+            }
+            set {
+                this["max_players"] = value;
+            }
+        }
     }
 }

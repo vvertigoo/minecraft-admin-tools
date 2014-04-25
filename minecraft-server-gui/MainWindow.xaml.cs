@@ -32,6 +32,7 @@ namespace minecraft_server_gui
         private Players players;
         private Settings settings;
         private byte playersOnline;
+        private string maxPlayers;
         
         public bool IsServerShutdown;
 
@@ -50,6 +51,8 @@ namespace minecraft_server_gui
             Button_Players.IsEnabled = false;
             Button_Send.IsEnabled = false;
             playersOnline = 0;
+            Properties.Settings.Default.ReadMaxPlayers();
+            maxPlayers = Properties.Settings.Default.max_players;
             UpdatePlayersOnline();
         }
 
@@ -92,13 +95,14 @@ namespace minecraft_server_gui
                     t.Start();
 
                     Status_ProgressBar.Value = 15.0;
+                    maxPlayers = Properties.Settings.Default.max_players;
                 }
             }
             else 
             {
+                Status_Text.Content = "Сервер выключен.";
                 System.Windows.MessageBox.Show("Не могу найти файлы java.exe и/или minecraft_server.exe.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 Button_Start.IsEnabled = true;
-                Status_Text.Content = "Сервер не работает.";
             }
         }
 
@@ -133,14 +137,8 @@ namespace minecraft_server_gui
         {
             if (Properties.Settings.Default.IsServerRunning)
             {
-                SERVER_INPUT.WriteLine("/tellraw @a {text:\"[ADMIN] " + Textbox_Send.Text + "\",color:green,bold:true}");
+                SERVER_INPUT.WriteLine("/say " + Textbox_Send.Text);
                 Textbox_Log.ScrollToEnd();
-                Textbox_Log.Text += "[ADMIN] " + Textbox_Send.Text + "\n";
-            }
-            else
-            {
-                Textbox_Log.ScrollToEnd();
-                Textbox_Log.Text += "Сначала запустите сервер)))\n";
             }
             Textbox_Send.Text = "";
         }
@@ -291,7 +289,7 @@ namespace minecraft_server_gui
 
         private void UpdatePlayersOnline()
         {
-            if (Properties.Settings.Default.IsServerRunning) Status_Players_Online.Content = "Игроков онлайн: " + Convert.ToString(playersOnline);
+            if (Properties.Settings.Default.IsServerRunning) Status_Players_Online.Content = "Игроков онлайн: " + Convert.ToString(playersOnline) + "/" + maxPlayers;
             else Status_Players_Online.Content = "Игроков онлайн: -";
         }
 

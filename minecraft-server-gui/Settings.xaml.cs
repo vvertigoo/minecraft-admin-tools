@@ -23,6 +23,7 @@ namespace minecraft_server_gui
         bool java_filename_changed;
 
         Settings_Server settings_server;
+        Settings_Remote settings_remote;
 
         public Settings()
         {
@@ -83,6 +84,19 @@ namespace minecraft_server_gui
         {
             Properties.Settings.Default.IsSettingsWindowActive = false;
             this.Owner.Activate();
+        }
+
+        private void Button_Settings_Remote_Click(object sender, RoutedEventArgs e)
+        {
+            if (!Properties.Settings.Default.IsSettingsRemoteWindowActive)
+            {
+                settings_remote = new Settings_Remote();
+                settings_remote.Owner = this;
+                settings_remote.ShowInTaskbar = false;
+                Properties.Settings.Default.IsSettingsRemoteWindowActive = true;
+                settings_remote.ShowDialog();
+            }
+            else settings_remote.Activate();
         }
     }
 }
