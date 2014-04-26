@@ -233,6 +233,10 @@ namespace minecraft_server_gui
                     playersOnline -= 1;
                     UpdatePlayersOnline();
                 }
+                else if (arg.Contains("Time ran backwards") || arg.Contains("Can't keep up"))
+                {
+                    SERVER_INPUT.WriteLine("/say There's was a lag on server side.");
+                }
 
             }
 
