@@ -220,6 +220,7 @@ namespace minecraft_server_gui
                     string nickname = arg.Substring(33);
                     nickname = nickname.Substring(0, nickname.Length - 16);
                     Properties.Settings.Default.PlayerNames.Add(nickname);
+                    ConnectMessage(nickname);
                     if (Properties.Settings.Default.IsPlayerWindowActive) players.List_Players.Items.Refresh();
                     playersOnline += 1;
                     UpdatePlayersOnline();
@@ -311,6 +312,34 @@ namespace minecraft_server_gui
                 players.Show();
             }
             else players.Activate();
+        }
+
+        private void ConnectMessage(string playerName)
+        {
+            if (File.Exists("connectmessages.conf"))
+            {
+                StreamReader connectMessageConfig = File.OpenText("connectmessages.conf");
+                string data;
+                while (!connectMessageConfig.EndOfStream)
+                {
+                    data = connectMessageConfig.ReadLine();
+                    if (!data.StartsWith("###"))
+                    {
+                        //SERVER_INPUT.WriteLine("/tell " + playerName + " " + data);
+                        SERVER_INPUT.WriteLine("/tellraw " + playerName + " {text:\"[SERVER] " + data + "\",color:green,bold:true}");
+                    }
+                }
+                connectMessageConfig.Close();
+            }
+            else
+            {
+                StreamWriter connectMessageConfig = File.CreateText("connectmessages.conf");
+                connectMessageConfig.WriteLine("### <- This is comment line");
+                connectMessageConfig.WriteLine("###");
+                connectMessageConfig.WriteLine("###");
+                connectMessageConfig.WriteLine("### In this file you can write any text, which will be displayed to connected players.");
+                connectMessageConfig.Close();
+            }
         }
     }
 }
