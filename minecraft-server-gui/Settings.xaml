@@ -14,6 +14,6 @@
         <Label Content="Max" HorizontalAlignment="Left" Margin="152,115,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="Textbox_Settings_RAM_Max" HorizontalAlignment="Left" Height="23" Margin="187,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="60"/>
         <Button x:Name="Button_Settings_Server" Content="Настройки сервера" HorizontalAlignment="Left" Margin="19,174,0,0" VerticalAlignment="Top" Width="150" Click="Button_Settings_Server_Click"/>
-        <Button x:Name="Button_Settings_Remote" Content="Удалённый доступ" HorizontalAlignment="Left" Margin="195,174,0,0" VerticalAlignment="Top" Width="150" Click="Button_Settings_Remote_Click"/>
+        <Button x:Name="Button_Settings_Remote" Content="Удалённый доступ" HorizontalAlignment="Left" Margin="195,174,0,0" VerticalAlignment="Top" Width="150" Click="Button_Settings_Remote_Click" Visibility="Hidden"/>
     </Grid>
 </Window>

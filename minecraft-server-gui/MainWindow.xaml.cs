@@ -33,6 +33,7 @@ namespace minecraft_server_gui
         private Settings settings;
         private byte playersOnline;
         private string maxPlayers;
+        private Config conf;
         
         public bool IsServerShutdown;
 
@@ -197,6 +198,7 @@ namespace minecraft_server_gui
                 else if (arg.Contains("Preparing spawn area")) Status_ProgressBar.Value = 95.0;
                 else if (arg.Contains("Done"))
                 {
+                    conf = new Config(SERVER_INPUT);
                     Status_ProgressBar.Value = 0.0;
                     Button_Stop.IsEnabled = true;
                     Properties.Settings.Default.IsServerRunning = true;
@@ -220,7 +222,7 @@ namespace minecraft_server_gui
                     string nickname = arg.Substring(33);
                     nickname = nickname.Substring(0, nickname.Length - 16);
                     Properties.Settings.Default.PlayerNames.Add(nickname);
-                    ConnectMessage(nickname);
+                    conf.JoinAct(nickname);
                     if (Properties.Settings.Default.IsPlayerWindowActive) players.List_Players.Items.Refresh();
                     playersOnline += 1;
                     UpdatePlayersOnline();
@@ -314,7 +316,7 @@ namespace minecraft_server_gui
             else players.Activate();
         }
 
-        private void ConnectMessage(string playerName)
+        /*private void ConnectMessage(string playerName)
         {
             if (File.Exists("connectmessages.conf"))
             {
@@ -340,6 +342,6 @@ namespace minecraft_server_gui
                 connectMessageConfig.WriteLine("### In this file you can write any text, which will be displayed to connected players.");
                 connectMessageConfig.Close();
             }
-        }
+        }*/
     }
 }

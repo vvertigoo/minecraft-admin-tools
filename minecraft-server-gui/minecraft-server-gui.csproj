@@ -99,6 +99,7 @@
     <Compile Include="Admin_Settings.xaml.cs">
       <DependentUpon>Admin_Settings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Config.cs" />
     <Compile Include="Players.xaml.cs">
       <DependentUpon>Players.xaml</DependentUpon>
     </Compile>
