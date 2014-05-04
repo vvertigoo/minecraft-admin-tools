@@ -1,26 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace minecraft_server_gui
 {
     /// <summary>
     /// Логика взаимодействия для Admin_Settings.xaml
     /// </summary>
-    public partial class Admin_Settings : Window
+    public partial class Admin_Settings
     {
-        private string[] macro_name_temp = new string[15];
-        private string[] macro_value_name = new string[15];
+        private readonly string[] macro_name_temp = new string[15];
+        private readonly string[] macro_value_name = new string[15];
 
         private int ComboSelected;
 
@@ -68,7 +58,7 @@ namespace minecraft_server_gui
 
         private void Combo_Admin_Settings_MacroSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(this.IsInitialized)
+            if(IsInitialized)
             {
                 switch (Combo_Admin_Settings_MacroSelect.SelectedIndex)
                 {
@@ -125,7 +115,7 @@ namespace minecraft_server_gui
 
         private void Button_Admin_Settings_Close_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void Button_Admin_Settings_Save_Click(object sender, RoutedEventArgs e)
@@ -170,7 +160,7 @@ namespace minecraft_server_gui
         private void Window_Admin_Settings_Closed(object sender, EventArgs e)
         {
             Properties.Settings.Default.IsAdminSettingsWindowActive = false;
-            this.Owner.Activate();
+            Owner.Activate();
         }
     }
 }

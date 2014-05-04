@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 
 namespace minecraft_server_gui.Properties {
@@ -26,7 +27,7 @@ namespace minecraft_server_gui.Properties {
             //
             // this.SettingChanging += this.SettingChangingEventHandler;
             //
-            this.SettingsSaving += this.SettingsSavingEventHandler;
+            SettingsSaving += SettingsSavingEventHandler;
             IsAdminWindowActive = false;
             IsAdminSettingsWindowActive = false;
             IsPlayerWindowActive = false;
@@ -38,11 +39,7 @@ namespace minecraft_server_gui.Properties {
             //
         }
         
-        private void SettingChangingEventHandler(object sender, System.Configuration.SettingChangingEventArgs e) {
-            // Добавьте здесь код для обработки события SettingChangingEvent.
-        }
-        
-        private void SettingsSavingEventHandler(object sender, System.ComponentModel.CancelEventArgs e) {
+        private void SettingsSavingEventHandler(object sender, CancelEventArgs e) {
             if (IsAdminWindowActive)
             {
                 UpdateMacrosNamesMethod();
@@ -54,11 +51,10 @@ namespace minecraft_server_gui.Properties {
             if (File.Exists("server.properties"))
             {
                 StreamReader serverCfgReader = File.OpenText("server.properties");
-                string data;
                 while (!serverCfgReader.EndOfStream)
                 {
-                    data = serverCfgReader.ReadLine();
-                    if (data.Contains("max-players"))
+                    string data = serverCfgReader.ReadLine();
+                    if (data != null && data.Contains("max-players"))
                     {
                         max_players = data.Substring("max-players=".Length);
                         break;

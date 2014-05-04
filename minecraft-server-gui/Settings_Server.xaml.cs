@@ -1,24 +1,14 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace minecraft_server_gui
 {
     /// <summary>
     /// Логика взаимодействия для Settings_Server.xaml
     /// </summary>
-    public partial class Settings_Server : Window
+    public partial class Settings_Server
     {
         public Settings_Server()
         {
@@ -34,10 +24,9 @@ namespace minecraft_server_gui
         private void ReadServerCfg()
         {
             StreamReader serverCfgReader = File.OpenText("server.properties");
-            string data;
             while (!serverCfgReader.EndOfStream)
             {
-                data = serverCfgReader.ReadLine();
+                string data = serverCfgReader.ReadLine();
                 if (data.Contains("generator-settings")) textbox_generator_settings.Text = data.Substring("generator-settings=".Length);
                 else if (data.Contains("op-permission-level")) textbox_op_permission_level.Text = data.Substring("op-permission-level=".Length);
                 else if (data.Contains("allow-nether")) textbox_allow_nether.Text = data.Substring("allow-nether=".Length);
@@ -155,22 +144,22 @@ namespace minecraft_server_gui
         private void Settings_Server_Window_Closed(object sender, EventArgs e)
         {
             Properties.Settings.Default.IsSettingsServerWindowActive = false;
-            this.Owner.Activate();
+            Owner.Activate();
         }
 
         private void Button_Server_Settings_Close_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void Button_Settings_Server_Help_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://minecraft-ru.gamepedia.com/%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5_%D0%B8_%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0_%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B0#.D0.9E.D0.BF.D0.B8.D1.81.D0.B0.D0.BD.D0.B8.D0.B5_.D0.BF.D0.B0.D1.80.D0.B0.D0.BC.D0.B5.D1.82.D1.80.D0.BE.D0.B2");
+            Process.Start("http://minecraft-ru.gamepedia.com/%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5_%D0%B8_%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0_%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B0#.D0.9E.D0.BF.D0.B8.D1.81.D0.B0.D0.BD.D0.B8.D0.B5_.D0.BF.D0.B0.D1.80.D0.B0.D0.BC.D0.B5.D1.82.D1.80.D0.BE.D0.B2");
         }
 
         private void Button_Settings_Server_Save_Click(object sender, RoutedEventArgs e)
         {
-            if (Properties.Settings.Default.IsServerRunning) System.Windows.MessageBox.Show("Всё сохранено, но для применения настроек необходимо перезапустить сервер.", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning);
+            if (Properties.Settings.Default.IsServerRunning) MessageBox.Show("Всё сохранено, но для применения настроек необходимо перезапустить сервер.", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning);
             WriteServerCfg();
         }
     }

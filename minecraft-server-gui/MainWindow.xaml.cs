@@ -1,20 +1,8 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Diagnostics;
 
 namespace minecraft_server_gui
@@ -22,11 +10,11 @@ namespace minecraft_server_gui
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
-        private System.Diagnostics.Process SERVER;
-        private System.IO.StreamWriter SERVER_INPUT;
-        private System.IO.StreamReader SERVER_OUTPUT;
+        private readonly Process SERVER;
+        private StreamWriter SERVER_INPUT;
+        private StreamReader SERVER_OUTPUT;
         private Thread t;
         private Admin admin;
         private Players players;
@@ -61,7 +49,7 @@ namespace minecraft_server_gui
         {
             if (Properties.Settings.Default.IsServerRunning)
             {
-                System.Windows.MessageBox.Show("Нельзя выйти из программы при работающем сервере.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Нельзя выйти из программы при работающем сервере.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
@@ -91,8 +79,7 @@ namespace minecraft_server_gui
                     SERVER_OUTPUT = SERVER.StandardOutput;
 
                     Status_ProgressBar.Value = 10.0;
-                    t = new Thread(new ThreadStart(GetLogMessage));
-                    t.Name = "Server output reader";
+                    t = new Thread(GetLogMessage) {Name = "Server output reader"};
                     t.Start();
 
                     Status_ProgressBar.Value = 15.0;
@@ -102,7 +89,7 @@ namespace minecraft_server_gui
             else 
             {
                 Status_Text.Content = "Сервер выключен.";
-                System.Windows.MessageBox.Show("Не могу найти файлы java.exe и/или minecraft_server.exe.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Не могу найти файлы java.exe и/или minecraft_server.exe.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 Button_Start.IsEnabled = true;
             }
         }
@@ -125,9 +112,7 @@ namespace minecraft_server_gui
         {
             if (!Properties.Settings.Default.IsSettingsWindowActive)
             {
-                settings = new Settings();
-                settings.Owner = this;
-                settings.ShowInTaskbar = false;
+                settings = new Settings {Owner = this, ShowInTaskbar = false};
                 Properties.Settings.Default.IsSettingsWindowActive = true;
                 settings.ShowDialog();
             }
@@ -154,7 +139,7 @@ namespace minecraft_server_gui
             Button_Send.IsDefault = false;
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
             if (Properties.Settings.Default.IsServerRunning)
             {
@@ -171,12 +156,14 @@ namespace minecraft_server_gui
         {
             if (!Properties.Settings.Default.IsAdminWindowActive)
             {
-                admin = new Admin();
-                admin.SERVER_INPUT = SERVER_INPUT;
-                admin.Left = this.Left + this.Width;
-                admin.Top = this.Top;
-                admin.Owner = this;
-                admin.ShowInTaskbar = false;
+                admin = new Admin
+                {
+                    SERVER_INPUT = SERVER_INPUT,
+                    Left = Left + Width,
+                    Top = Top,
+                    Owner = this,
+                    ShowInTaskbar = false
+                };
                 Properties.Settings.Default.IsAdminWindowActive = true;
                 admin.Show();
             }
@@ -260,6 +247,7 @@ namespace minecraft_server_gui
                     PrintLogMessage(SERVER_OUTPUT.ReadLine());
                 }
             }
+            // ReSharper disable once FunctionNeverReturns
         }
 
         private void ShutownServer()
@@ -284,13 +272,13 @@ namespace minecraft_server_gui
         {
             if (Properties.Settings.Default.IsAdminWindowActive)
             {
-                admin.Left = this.Left + this.Width;
-                admin.Top = this.Top;
+                admin.Left = Left + Width;
+                admin.Top = Top;
             }
             if (Properties.Settings.Default.IsPlayerWindowActive)
             {
-                players.Left = this.Left;
-                players.Top = this.Top + this.Height;
+                players.Left = Left;
+                players.Top = Top + Height;
             }
         }
 
@@ -304,11 +292,13 @@ namespace minecraft_server_gui
         {
             if (!Properties.Settings.Default.IsPlayerWindowActive)
             {
-                players = new Players();
-                players.Left = this.Left;
-                players.Top = this.Top + this.Height;
-                players.Owner = this;
-                players.ShowInTaskbar = false;
+                players = new Players
+                {
+                    Left = Left,
+                    Top = Top + Height,
+                    Owner = this,
+                    ShowInTaskbar = false
+                };
                 Properties.Settings.Default.IsPlayerWindowActive = true;
                 players.SERVER_INPUT = SERVER_INPUT;
                 players.Show();

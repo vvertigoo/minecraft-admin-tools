@@ -1,16 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace minecraft_server_gui
 {
@@ -18,9 +8,9 @@ namespace minecraft_server_gui
     /// <summary>
     /// Логика взаимодействия для Admin.xaml
     /// </summary>
-    public partial class Admin : Window
+    public partial class Admin
     {
-        public System.IO.StreamWriter SERVER_INPUT;
+        public StreamWriter SERVER_INPUT;
         private Admin_Settings admin_settings;
 
         public Admin()
@@ -51,7 +41,7 @@ namespace minecraft_server_gui
 
         private void Button_Admin_Close_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void Button_Admin_Enter_Click(object sender, RoutedEventArgs e)
@@ -64,9 +54,7 @@ namespace minecraft_server_gui
         {
             if (!Properties.Settings.Default.IsAdminSettingsWindowActive)
             {
-                admin_settings = new Admin_Settings();
-                admin_settings.ShowInTaskbar = false;
-                admin_settings.Owner = this;
+                admin_settings = new Admin_Settings {ShowInTaskbar = false, Owner = this};
                 Properties.Settings.Default.IsAdminSettingsWindowActive = true;
                 admin_settings.ShowDialog();
             }
@@ -158,7 +146,7 @@ namespace minecraft_server_gui
         private void Window_Admin_Closed(object sender, EventArgs e)
         {
             Properties.Settings.Default.IsAdminWindowActive = false;
-            this.Owner.Activate();
+            Owner.Activate();
         }
     }
 }

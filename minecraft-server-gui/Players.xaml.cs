@@ -1,25 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace minecraft_server_gui
 {
     /// <summary>
     /// Логика взаимодействия для Players.xaml
     /// </summary>
-    public partial class Players : Window
+    public partial class Players
     {
-        public System.IO.StreamWriter SERVER_INPUT;
+        public StreamWriter SERVER_INPUT;
 
         public Players()
         {
@@ -34,22 +26,22 @@ namespace minecraft_server_gui
 
         private void Button_Players_Close_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void Button_Players_Kick_Click(object sender, RoutedEventArgs e)
         {
-            SERVER_INPUT.WriteLine("/kick " + List_Players.SelectedValue.ToString());
+            SERVER_INPUT.WriteLine("/kick " + List_Players.SelectedValue);
         }
 
         private void Button_Players_Ban_Click(object sender, RoutedEventArgs e)
         {
-            SERVER_INPUT.WriteLine("/ban " + List_Players.SelectedValue.ToString());
+            SERVER_INPUT.WriteLine("/ban " + List_Players.SelectedValue);
         }
 
         private void Button_Players_Message_Send_Click(object sender, RoutedEventArgs e)
         {
-            SERVER_INPUT.WriteLine("/tell " + List_Players.SelectedValue.ToString() + " " + Textbox_Players_Message.Text);
+            SERVER_INPUT.WriteLine("/tell " + List_Players.SelectedValue + " " + Textbox_Players_Message.Text);
             Textbox_Players_Message.Text = "";
         }
 
@@ -63,7 +55,7 @@ namespace minecraft_server_gui
         private void Window_Players_Closed(object sender, EventArgs e)
         {
             Properties.Settings.Default.IsPlayerWindowActive = false;
-            this.Owner.Activate();
+            Owner.Activate();
         }
     }
 }

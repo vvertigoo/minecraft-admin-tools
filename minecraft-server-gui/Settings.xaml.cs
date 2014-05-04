@@ -1,23 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace minecraft_server_gui
 {
     /// <summary>
     /// Логика взаимодействия для Settings.xaml
     /// </summary>
-    public partial class Settings : Window
+    public partial class Settings
     {
         string newFileName;
         bool java_filename_changed;
@@ -36,18 +26,20 @@ namespace minecraft_server_gui
 
         private void Button_Settings_Close_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void Button_Settings_More_Click(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.FileName = "java"; // Default file name
-            dlg.DefaultExt = ".exe"; // Default file extension
-            dlg.Filter = "Application (.exe)|*.exe"; // Filter files by extension 
+            var dlg = new OpenFileDialog
+            {
+                FileName = "java",
+                DefaultExt = ".exe",
+                Filter = "Application (.exe)|*.exe"
+            };
 
             // Show open file dialog box
-            Nullable<bool> result = dlg.ShowDialog();
+            bool? result = dlg.ShowDialog();
 
             // Process open file dialog box results 
             if (result == true)
@@ -71,9 +63,7 @@ namespace minecraft_server_gui
         {
             if (!Properties.Settings.Default.IsSettingsServerWindowActive)
             {
-                settings_server = new Settings_Server();
-                settings_server.Owner = this;
-                settings_server.ShowInTaskbar = false;
+                settings_server = new Settings_Server {Owner = this, ShowInTaskbar = false};
                 Properties.Settings.Default.IsSettingsServerWindowActive = true;
                 settings_server.ShowDialog();
             }
@@ -83,16 +73,14 @@ namespace minecraft_server_gui
         private void Window_Settings_Closed(object sender, EventArgs e)
         {
             Properties.Settings.Default.IsSettingsWindowActive = false;
-            this.Owner.Activate();
+            Owner.Activate();
         }
 
         private void Button_Settings_Remote_Click(object sender, RoutedEventArgs e)
         {
             if (!Properties.Settings.Default.IsSettingsRemoteWindowActive)
             {
-                settings_remote = new Settings_Remote();
-                settings_remote.Owner = this;
-                settings_remote.ShowInTaskbar = false;
+                settings_remote = new Settings_Remote {Owner = this, ShowInTaskbar = false};
                 Properties.Settings.Default.IsSettingsRemoteWindowActive = true;
                 settings_remote.ShowDialog();
             }

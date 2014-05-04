@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Timers;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -10,13 +9,13 @@ namespace minecraft_server_gui
 
     public class Config
     {
-        private List<ConfigItemBase> OnJoin;
-        private List<ConfigItemTimed> Timed;
-        private System.IO.StreamWriter SERVER_INPUT;
+        private readonly List<ConfigItemBase> OnJoin;
+        private readonly List<ConfigItemTimed> Timed;
+        private readonly StreamWriter SERVER_INPUT;
 
         private ConfigState configState;
 
-        public Config(System.IO.StreamWriter server_input)
+        public Config(StreamWriter server_input)
         {
             SERVER_INPUT = server_input;
             OnJoin = new List<ConfigItemBase>();
@@ -77,10 +76,9 @@ namespace minecraft_server_gui
                 else if (input.Contains("CONSOLE"))
                 {
                     int i;
-                    string command;
                     string[] subs = Regex.Split(input, " CONSOLE ");
                     int.TryParse(subs[0], out i);
-                    command = subs[1];
+                    string command = subs[1];
                     Timed.Add(new ConfigItemTimed(ItemType.Backup, command, i, Handler));
                 }
                 else if (input.Contains("BACKUP"))
@@ -131,14 +129,14 @@ namespace minecraft_server_gui
     public class ConfigItemTimed : ConfigItemBase
     {
         protected Timer timer;
-        HandleFunc Func;
+        readonly HandleFunc Func;
 
         public ConfigItemTimed(ItemType type, string parameter, int delay, HandleFunc func)
             :base (type, parameter)
         {
             timer = new Timer();
             Func = func;
-            timer.Elapsed += new ElapsedEventHandler(Handler);
+            timer.Elapsed += Handler;
             timer.Interval = delay * 60000;
         }
 
