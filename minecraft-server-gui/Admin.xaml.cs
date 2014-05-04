@@ -10,8 +10,8 @@ namespace minecraft_server_gui
     /// </summary>
     public partial class Admin
     {
-        public StreamWriter SERVER_INPUT;
-        private Admin_Settings admin_settings;
+        public StreamWriter ServerInput;
+        private AdminSettings _adminSettings;
 
         public Admin()
         {
@@ -22,21 +22,21 @@ namespace minecraft_server_gui
 
         public void UpdateMacros()
         {
-            Button_Admin_Macro1.Content = Properties.Settings.Default.macro_1_name;
-            Button_Admin_Macro2.Content = Properties.Settings.Default.macro_2_name;
-            Button_Admin_Macro3.Content = Properties.Settings.Default.macro_3_name;
-            Button_Admin_Macro4.Content = Properties.Settings.Default.macro_4_name;
-            Button_Admin_Macro5.Content = Properties.Settings.Default.macro_5_name;
-            Button_Admin_Macro6.Content = Properties.Settings.Default.macro_6_name;
-            Button_Admin_Macro7.Content = Properties.Settings.Default.macro_7_name;
-            Button_Admin_Macro8.Content = Properties.Settings.Default.macro_8_name;
-            Button_Admin_Macro9.Content = Properties.Settings.Default.macro_9_name;
-            Button_Admin_Macro10.Content = Properties.Settings.Default.macro_10_name;
-            Button_Admin_Macro11.Content = Properties.Settings.Default.macro_11_name;
-            Button_Admin_Macro12.Content = Properties.Settings.Default.macro_12_name;
-            Button_Admin_Macro13.Content = Properties.Settings.Default.macro_13_name;
-            Button_Admin_Macro14.Content = Properties.Settings.Default.macro_14_name;
-            Button_Admin_Macro15.Content = Properties.Settings.Default.macro_15_name;
+            ButtonMacro1.Content = Properties.Settings.Default.macro_1_name;
+            ButtonMacro2.Content = Properties.Settings.Default.macro_2_name;
+            ButtonMacro3.Content = Properties.Settings.Default.macro_3_name;
+            ButtonMacro4.Content = Properties.Settings.Default.macro_4_name;
+            ButtonMacro5.Content = Properties.Settings.Default.macro_5_name;
+            ButtonMacro6.Content = Properties.Settings.Default.macro_6_name;
+            ButtonMacro7.Content = Properties.Settings.Default.macro_7_name;
+            ButtonMacro8.Content = Properties.Settings.Default.macro_8_name;
+            ButtonMacro9.Content = Properties.Settings.Default.macro_9_name;
+            ButtonMacro10.Content = Properties.Settings.Default.macro_10_name;
+            ButtonMacro11.Content = Properties.Settings.Default.macro_11_name;
+            ButtonMacro12.Content = Properties.Settings.Default.macro_12_name;
+            ButtonMacro13.Content = Properties.Settings.Default.macro_13_name;
+            ButtonMacro14.Content = Properties.Settings.Default.macro_14_name;
+            ButtonMacro15.Content = Properties.Settings.Default.macro_15_name;
         }
 
         private void Button_Admin_Close_Click(object sender, RoutedEventArgs e)
@@ -46,24 +46,24 @@ namespace minecraft_server_gui
 
         private void Button_Admin_Enter_Click(object sender, RoutedEventArgs e)
         {
-            SERVER_INPUT.WriteLine(Textbox_Admin_Input.Text);
-            Textbox_Admin_Input.Text = "";
+            ServerInput.WriteLine(TextboxInput.Text);
+            TextboxInput.Text = "";
         }
 
         private void Button_Admin_Settings_Click(object sender, RoutedEventArgs e)
         {
             if (!Properties.Settings.Default.IsAdminSettingsWindowActive)
             {
-                admin_settings = new Admin_Settings {ShowInTaskbar = false, Owner = this};
+                _adminSettings = new AdminSettings {ShowInTaskbar = false, Owner = this};
                 Properties.Settings.Default.IsAdminSettingsWindowActive = true;
-                admin_settings.ShowDialog();
+                _adminSettings.ShowDialog();
             }
-            else if (admin_settings.IsInitialized) admin_settings.Activate();
+            else if (_adminSettings.IsInitialized) _adminSettings.Activate();
         }
 
         private void PlaceMacro(string macro)
         {
-            Textbox_Admin_Input.Text += macro;
+            TextboxInput.Text += macro;
         }
 
         #region

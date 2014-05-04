@@ -5,9 +5,9 @@ namespace minecraft_server_gui
     /// <summary>
     /// Логика взаимодействия для Settings_Remote.xaml
     /// </summary>
-    public partial class Settings_Remote
+    public partial class SettingsRemote
     {
-        public Settings_Remote()
+        public SettingsRemote()
         {
             InitializeComponent();
         }

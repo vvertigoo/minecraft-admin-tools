@@ -8,9 +8,9 @@ namespace minecraft_server_gui
     /// <summary>
     /// Логика взаимодействия для Settings_Server.xaml
     /// </summary>
-    public partial class Settings_Server
+    public partial class SettingsServer
     {
-        public Settings_Server()
+        public SettingsServer()
         {
             InitializeComponent();
             if (File.Exists("server.properties")) ReadServerCfg();
@@ -27,38 +27,38 @@ namespace minecraft_server_gui
             while (!serverCfgReader.EndOfStream)
             {
                 string data = serverCfgReader.ReadLine();
-                if (data.Contains("generator-settings")) textbox_generator_settings.Text = data.Substring("generator-settings=".Length);
-                else if (data.Contains("op-permission-level")) textbox_op_permission_level.Text = data.Substring("op-permission-level=".Length);
-                else if (data.Contains("allow-nether")) textbox_allow_nether.Text = data.Substring("allow-nether=".Length);
-                else if (data.Contains("level-name")) textbox_level_name.Text = data.Substring("level-name=".Length);
-                else if (data.Contains("enable-query")) textbox_enable_query.Text = data.Substring("enable-query=".Length);
-                else if (data.Contains("allow-flight")) textbox_allow_flight.Text = data.Substring("allow-flight=".Length);
-                else if (data.Contains("announce-player-achievements")) textbox_announce_player_achievements.Text = data.Substring("announce-player-achievements=".Length);
-                else if (data.Contains("server-port")) textbox_server_port.Text = data.Substring("server-port=".Length);
-                else if (data.Contains("level-type")) textbox_level_type.Text = data.Substring("level-type=".Length);
-                else if (data.Contains("enable-rcon")) textbox_enable_rcon.Text = data.Substring("enable-rcon=".Length);
-                else if (data.Contains("force-gamemode")) textbox_force_gamemode.Text = data.Substring("force-gamemode=".Length);
-                else if (data.Contains("level-seed")) textbox_level_seed.Text = data.Substring("level-seed=".Length);
-                else if (data.Contains("server-ip")) textbox_server_ip.Text = data.Substring("server-ip=".Length);
-                else if (data.Contains("max-build-height")) textbox_max_build_height.Text = data.Substring("max-build-height=".Length);
-                else if (data.Contains("spawn-npcs")) textbox_spawn_npcs.Text = data.Substring("spawn-npcs=".Length);
-                else if (data.Contains("white-list")) textbox_white_list.Text = data.Substring("white-list=".Length);
-                else if (data.Contains("spawn-animals")) textbox_spawn_animals.Text = data.Substring("spawn-animals=".Length);
-                else if (data.Contains("snooper-enabled")) textbox_snooper_enabled.Text = data.Substring("snooper-enabled=".Length);
-                else if (data.Contains("hardcore")) textbox_hardcore.Text = data.Substring("hardcore=".Length);
-                else if (data.Contains("online-mode")) textbox_online_mode.Text = data.Substring("online-mode=".Length);
-                else if (data.Contains("resource-pack")) textbox_resource_pack.Text = data.Substring("resource-pack=".Length);
-                else if (data.Contains("pvp")) textbox_pvp.Text = data.Substring("pvp=".Length);
-                else if (data.Contains("difficulty")) textbox_difficulty.Text = data.Substring("difficulty=".Length);
-                else if (data.Contains("enable-command-block")) textbox_enable_command_block.Text = data.Substring("enable-command-block=".Length);
-                else if (data.Contains("player-idle-timeout")) textbox_player_idle_timeout.Text = data.Substring("player-idle-timeout=".Length);
-                else if (data.Contains("gamemode")) textbox_gamemode.Text = data.Substring("gamemode=".Length);
-                else if (data.Contains("max-players")) textbox_max_players.Text = data.Substring("max-players=".Length);
-                else if (data.Contains("spawn-monsters")) textbox_spawn_monsters.Text = data.Substring("spawn-monsters=".Length);
-                else if (data.Contains("view-distance")) textbox_view_distance.Text = data.Substring("view-distance=".Length);
-                else if (data.Contains("generate-structures")) textbox_generate_structures.Text = data.Substring("generate-structures=".Length);
-                else if (data.Contains("spawn-protection")) textbox_spawn_protection.Text = data.Substring("spawn-protection=".Length);
-                else if (data.Contains("motd")) textbox_motd.Text = data.Substring("motd=".Length);
+                if (data.Contains("generator-settings")) TextboxGeneratorSettings.Text = data.Substring("generator-settings=".Length);
+                else if (data.Contains("op-permission-level")) TextboxOpPermissionLevel.Text = data.Substring("op-permission-level=".Length);
+                else if (data.Contains("allow-nether")) TextboxAllowNether.Text = data.Substring("allow-nether=".Length);
+                else if (data.Contains("level-name")) TextboxLevelName.Text = data.Substring("level-name=".Length);
+                else if (data.Contains("enable-query")) TextboxEnableQuery.Text = data.Substring("enable-query=".Length);
+                else if (data.Contains("allow-flight")) TextboxAllowFlight.Text = data.Substring("allow-flight=".Length);
+                else if (data.Contains("announce-player-achievements")) TextboxAnnouncePlayerAchievements.Text = data.Substring("announce-player-achievements=".Length);
+                else if (data.Contains("server-port")) TextboxServerPort.Text = data.Substring("server-port=".Length);
+                else if (data.Contains("level-type")) TextboxLevelType.Text = data.Substring("level-type=".Length);
+                else if (data.Contains("enable-rcon")) TextboxEnableRcon.Text = data.Substring("enable-rcon=".Length);
+                else if (data.Contains("force-gamemode")) TextboxForceGamemode.Text = data.Substring("force-gamemode=".Length);
+                else if (data.Contains("level-seed")) TextboxLevelSeed.Text = data.Substring("level-seed=".Length);
+                else if (data.Contains("server-ip")) TextboxServerIp.Text = data.Substring("server-ip=".Length);
+                else if (data.Contains("max-build-height")) TextboxMaxBuildHeight.Text = data.Substring("max-build-height=".Length);
+                else if (data.Contains("spawn-npcs")) TextboxSpawnNpcs.Text = data.Substring("spawn-npcs=".Length);
+                else if (data.Contains("white-list")) TextboxWhiteList.Text = data.Substring("white-list=".Length);
+                else if (data.Contains("spawn-animals")) TextboxSpawnAnimals.Text = data.Substring("spawn-animals=".Length);
+                else if (data.Contains("snooper-enabled")) TextboxSnooperEnabled.Text = data.Substring("snooper-enabled=".Length);
+                else if (data.Contains("hardcore")) TextboxHardcore.Text = data.Substring("hardcore=".Length);
+                else if (data.Contains("online-mode")) TextboxOnlineMode.Text = data.Substring("online-mode=".Length);
+                else if (data.Contains("resource-pack")) TextboxResourcePack.Text = data.Substring("resource-pack=".Length);
+                else if (data.Contains("pvp")) TextboxPvp.Text = data.Substring("pvp=".Length);
+                else if (data.Contains("difficulty")) TextboxDifficulty.Text = data.Substring("difficulty=".Length);
+                else if (data.Contains("enable-command-block")) TextboxEnableCommandBlock.Text = data.Substring("enable-command-block=".Length);
+                else if (data.Contains("player-idle-timeout")) TextboxPlayerIdleTimeout.Text = data.Substring("player-idle-timeout=".Length);
+                else if (data.Contains("gamemode")) TextboxGamemode.Text = data.Substring("gamemode=".Length);
+                else if (data.Contains("max-players")) TextboxMaxPlayers.Text = data.Substring("max-players=".Length);
+                else if (data.Contains("spawn-monsters")) TextboxSpawnMonsters.Text = data.Substring("spawn-monsters=".Length);
+                else if (data.Contains("view-distance")) TextboxViewDistance.Text = data.Substring("view-distance=".Length);
+                else if (data.Contains("generate-structures")) TextboxGenerateStructures.Text = data.Substring("generate-structures=".Length);
+                else if (data.Contains("spawn-protection")) TextboxSpawnProtection.Text = data.Substring("spawn-protection=".Length);
+                else if (data.Contains("motd")) TextboxMotd.Text = data.Substring("motd=".Length);
             }
             serverCfgReader.Close();
         }
@@ -67,40 +67,40 @@ namespace minecraft_server_gui
         {
             File.Delete("server.properties");
             StreamWriter serverCfgWriter = File.CreateText("server.properties");
-            serverCfgWriter.WriteLine("generator-settings=" + textbox_generator_settings.Text);
-            serverCfgWriter.WriteLine("op-permission-level=" + textbox_op_permission_level.Text);
-            serverCfgWriter.WriteLine("allow-nether=" + textbox_allow_nether.Text);
-            serverCfgWriter.WriteLine("level-name=" + textbox_level_name.Text);
-            serverCfgWriter.WriteLine("enable-query=" + textbox_enable_query.Text);
-            serverCfgWriter.WriteLine("allow-flight=" + textbox_allow_flight.Text);
-            serverCfgWriter.WriteLine("announce-player-achievements=" + textbox_announce_player_achievements.Text);
-            serverCfgWriter.WriteLine("server-port=" + textbox_server_port.Text);
-            serverCfgWriter.WriteLine("level-type=" + textbox_level_type.Text);
-            serverCfgWriter.WriteLine("enable-rcon=" + textbox_enable_rcon.Text);
-            serverCfgWriter.WriteLine("force-gamemode=" + textbox_force_gamemode.Text);
-            serverCfgWriter.WriteLine("level-seed=" + textbox_level_seed.Text);
-            serverCfgWriter.WriteLine("server-ip=" + textbox_server_ip.Text);
-            serverCfgWriter.WriteLine("max-build-height=" + textbox_max_build_height.Text);
-            serverCfgWriter.WriteLine("spawn-npcs=" + textbox_spawn_npcs.Text);
-            serverCfgWriter.WriteLine("white-list=" + textbox_white_list.Text);
-            serverCfgWriter.WriteLine("spawn-animals=" + textbox_spawn_animals.Text);
-            serverCfgWriter.WriteLine("snooper-enabled=" + textbox_snooper_enabled.Text);
-            serverCfgWriter.WriteLine("hardcore=" + textbox_hardcore.Text);
-            serverCfgWriter.WriteLine("online-mode=" + textbox_online_mode.Text);
-            serverCfgWriter.WriteLine("resource-pack=" + textbox_resource_pack.Text);
-            serverCfgWriter.WriteLine("pvp=" + textbox_pvp.Text);
-            serverCfgWriter.WriteLine("difficulty=" + textbox_difficulty.Text);
-            serverCfgWriter.WriteLine("enable-command-block=" + textbox_enable_command_block.Text);
-            serverCfgWriter.WriteLine("player-idle-timeout=" + textbox_player_idle_timeout.Text);
-            serverCfgWriter.WriteLine("gamemode=" + textbox_gamemode.Text);
-            serverCfgWriter.WriteLine("max-players=" + textbox_max_players.Text);
-            serverCfgWriter.WriteLine("spawn-monsters=" + textbox_spawn_monsters.Text);
-            serverCfgWriter.WriteLine("view-distance=" + textbox_view_distance.Text);
-            serverCfgWriter.WriteLine("generate-structures=" + textbox_generate_structures.Text);
-            serverCfgWriter.WriteLine("spawn-protection=" + textbox_spawn_protection.Text);
-            serverCfgWriter.WriteLine("motd=" + textbox_motd.Text);
+            serverCfgWriter.WriteLine("generator-settings=" + TextboxGeneratorSettings.Text);
+            serverCfgWriter.WriteLine("op-permission-level=" + TextboxOpPermissionLevel.Text);
+            serverCfgWriter.WriteLine("allow-nether=" + TextboxAllowNether.Text);
+            serverCfgWriter.WriteLine("level-name=" + TextboxLevelName.Text);
+            serverCfgWriter.WriteLine("enable-query=" + TextboxEnableQuery.Text);
+            serverCfgWriter.WriteLine("allow-flight=" + TextboxAllowFlight.Text);
+            serverCfgWriter.WriteLine("announce-player-achievements=" + TextboxAnnouncePlayerAchievements.Text);
+            serverCfgWriter.WriteLine("server-port=" + TextboxServerPort.Text);
+            serverCfgWriter.WriteLine("level-type=" + TextboxLevelType.Text);
+            serverCfgWriter.WriteLine("enable-rcon=" + TextboxEnableRcon.Text);
+            serverCfgWriter.WriteLine("force-gamemode=" + TextboxForceGamemode.Text);
+            serverCfgWriter.WriteLine("level-seed=" + TextboxLevelSeed.Text);
+            serverCfgWriter.WriteLine("server-ip=" + TextboxServerIp.Text);
+            serverCfgWriter.WriteLine("max-build-height=" + TextboxMaxBuildHeight.Text);
+            serverCfgWriter.WriteLine("spawn-npcs=" + TextboxSpawnNpcs.Text);
+            serverCfgWriter.WriteLine("white-list=" + TextboxWhiteList.Text);
+            serverCfgWriter.WriteLine("spawn-animals=" + TextboxSpawnAnimals.Text);
+            serverCfgWriter.WriteLine("snooper-enabled=" + TextboxSnooperEnabled.Text);
+            serverCfgWriter.WriteLine("hardcore=" + TextboxHardcore.Text);
+            serverCfgWriter.WriteLine("online-mode=" + TextboxOnlineMode.Text);
+            serverCfgWriter.WriteLine("resource-pack=" + TextboxResourcePack.Text);
+            serverCfgWriter.WriteLine("pvp=" + TextboxPvp.Text);
+            serverCfgWriter.WriteLine("difficulty=" + TextboxDifficulty.Text);
+            serverCfgWriter.WriteLine("enable-command-block=" + TextboxEnableCommandBlock.Text);
+            serverCfgWriter.WriteLine("player-idle-timeout=" + TextboxPlayerIdleTimeout.Text);
+            serverCfgWriter.WriteLine("gamemode=" + TextboxGamemode.Text);
+            serverCfgWriter.WriteLine("max-players=" + TextboxMaxPlayers.Text);
+            serverCfgWriter.WriteLine("spawn-monsters=" + TextboxSpawnMonsters.Text);
+            serverCfgWriter.WriteLine("view-distance=" + TextboxViewDistance.Text);
+            serverCfgWriter.WriteLine("generate-structures=" + TextboxGenerateStructures.Text);
+            serverCfgWriter.WriteLine("spawn-protection=" + TextboxSpawnProtection.Text);
+            serverCfgWriter.WriteLine("motd=" + TextboxMotd.Text);
             serverCfgWriter.Close();
-            Properties.Settings.Default.max_players = textbox_max_players.Text;
+            Properties.Settings.Default.max_players = TextboxMaxPlayers.Text;
         }
 
         private void CreateNewCfg()

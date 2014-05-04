@@ -9,17 +9,17 @@ namespace minecraft_server_gui
 
     public class Config
     {
-        private readonly List<ConfigItemBase> OnJoin;
-        private readonly List<ConfigItemTimed> Timed;
-        private readonly StreamWriter SERVER_INPUT;
+        private readonly List<ConfigItemBase> _onJoin;
+        private readonly List<ConfigItemTimed> _timed;
+        private readonly StreamWriter _serverInput;
 
-        private ConfigState configState;
+        private ConfigState _configState;
 
-        public Config(StreamWriter server_input)
+        public Config(StreamWriter serverInput)
         {
-            SERVER_INPUT = server_input;
-            OnJoin = new List<ConfigItemBase>();
-            Timed = new List<ConfigItemTimed>();
+            _serverInput = serverInput;
+            _onJoin = new List<ConfigItemBase>();
+            _timed = new List<ConfigItemTimed>();
 
             if (File.Exists("minecraft-server-gui.conf"))
             {
@@ -55,18 +55,18 @@ namespace minecraft_server_gui
             {
                 if (input.StartsWith("[onjoin]"))
                 {
-                    configState = ConfigState.OnJoin;
+                    _configState = ConfigState.OnJoin;
                 }
                 else if (input.StartsWith("[timed]"))
                 {
-                    configState = ConfigState.Timed;
+                    _configState = ConfigState.Timed;
                 }
                 else if (input.StartsWith("CONSOLE"))
                 {
-                    if (configState == ConfigState.OnJoin)
+                    if (_configState == ConfigState.OnJoin)
                     {
                         string data = input.Substring("CONSOLE ".Length);
-                        OnJoin.Add(new ConfigItemBase(ItemType.Console, data));
+                        _onJoin.Add(new ConfigItemBase(ItemType.Console, data));
                     }
                 }
                 else if (input.StartsWith("BACKUP"))
@@ -79,14 +79,14 @@ namespace minecraft_server_gui
                     string[] subs = Regex.Split(input, " CONSOLE ");
                     int.TryParse(subs[0], out i);
                     string command = subs[1];
-                    Timed.Add(new ConfigItemTimed(ItemType.Backup, command, i, Handler));
+                    _timed.Add(new ConfigItemTimed(ItemType.Backup, command, i, Handler));
                 }
                 else if (input.Contains("BACKUP"))
                 {
                     int i;
                     string[] subs = Regex.Split(input, " BACKUP");
                     int.TryParse(subs[0], out i);
-                    Timed.Add(new ConfigItemTimed(ItemType.Backup, " ", i, Handler));
+                    _timed.Add(new ConfigItemTimed(ItemType.Backup, " ", i, Handler));
                 }
 
             }
@@ -99,12 +99,12 @@ namespace minecraft_server_gui
 
         public void Handler(ItemType type, string parameter)
         {
-            SERVER_INPUT.WriteLine("/say DEBUG: Here something happened");
+            _serverInput.WriteLine("/say DEBUG: Here something happened");
         }
 
         public void JoinAct(string playername)
         {
-            SERVER_INPUT.WriteLine("/say DEBUG: Someone joined");
+            _serverInput.WriteLine("/say DEBUG: Someone joined");
         }
     }
 
@@ -128,21 +128,21 @@ namespace minecraft_server_gui
 
     public class ConfigItemTimed : ConfigItemBase
     {
-        protected Timer timer;
-        readonly HandleFunc Func;
+        protected Timer Timer;
+        readonly HandleFunc _func;
 
         public ConfigItemTimed(ItemType type, string parameter, int delay, HandleFunc func)
             :base (type, parameter)
         {
-            timer = new Timer();
-            Func = func;
-            timer.Elapsed += Handler;
-            timer.Interval = delay * 60000;
+            Timer = new Timer();
+            _func = func;
+            Timer.Elapsed += Handler;
+            Timer.Interval = delay * 60000;
         }
 
         private void Handler(object source, ElapsedEventArgs e)
         {
-            Func(Type, Parameter);
+            _func(Type, Parameter);
         }
     }
 

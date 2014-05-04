@@ -9,19 +9,19 @@ namespace minecraft_server_gui
     /// </summary>
     public partial class Settings
     {
-        string newFileName;
-        bool java_filename_changed;
+        string _newFileName;
+        bool _javaFilenameChanged;
 
-        Settings_Server settings_server;
-        Settings_Remote settings_remote;
+        SettingsServer _settingsServer;
+        SettingsRemote _settingsRemote;
 
         public Settings()
         {
             InitializeComponent();
-            Textbox_Settings_JavaPath.Text = Properties.Settings.Default.java_path;
-            Textbox_Settings_RAM_Min.Text = Properties.Settings.Default.RAM_Min;
-            Textbox_Settings_RAM_Max.Text = Properties.Settings.Default.RAM_Max;
-            java_filename_changed = false;
+            TextboxJavaPath.Text = Properties.Settings.Default.java_path;
+            TextboxRamMin.Text = Properties.Settings.Default.RAM_Min;
+            TextboxRamMax.Text = Properties.Settings.Default.RAM_Max;
+            _javaFilenameChanged = false;
         }
 
         private void Button_Settings_Close_Click(object sender, RoutedEventArgs e)
@@ -45,17 +45,17 @@ namespace minecraft_server_gui
             if (result == true)
             {
                 // Open document 
-                newFileName = dlg.FileName;
-                Textbox_Settings_JavaPath.Text = newFileName;
-                java_filename_changed = true;
+                _newFileName = dlg.FileName;
+                TextboxJavaPath.Text = _newFileName;
+                _javaFilenameChanged = true;
             }
         }
 
         private void Button_Settings_Save_Click(object sender, RoutedEventArgs e)
         {
-            if(java_filename_changed) Properties.Settings.Default.java_path = newFileName;
-            Properties.Settings.Default.RAM_Min = Textbox_Settings_RAM_Min.Text;
-            Properties.Settings.Default.RAM_Max = Textbox_Settings_RAM_Max.Text;
+            if(_javaFilenameChanged) Properties.Settings.Default.java_path = _newFileName;
+            Properties.Settings.Default.RAM_Min = TextboxRamMin.Text;
+            Properties.Settings.Default.RAM_Max = TextboxRamMax.Text;
             Properties.Settings.Default.Save();
         }
 
@@ -63,11 +63,11 @@ namespace minecraft_server_gui
         {
             if (!Properties.Settings.Default.IsSettingsServerWindowActive)
             {
-                settings_server = new Settings_Server {Owner = this, ShowInTaskbar = false};
+                _settingsServer = new SettingsServer {Owner = this, ShowInTaskbar = false};
                 Properties.Settings.Default.IsSettingsServerWindowActive = true;
-                settings_server.ShowDialog();
+                _settingsServer.ShowDialog();
             }
-            else settings_server.Activate();
+            else _settingsServer.Activate();
         }
 
         private void Window_Settings_Closed(object sender, EventArgs e)
@@ -80,11 +80,11 @@ namespace minecraft_server_gui
         {
             if (!Properties.Settings.Default.IsSettingsRemoteWindowActive)
             {
-                settings_remote = new Settings_Remote {Owner = this, ShowInTaskbar = false};
+                _settingsRemote = new SettingsRemote {Owner = this, ShowInTaskbar = false};
                 Properties.Settings.Default.IsSettingsRemoteWindowActive = true;
-                settings_remote.ShowDialog();
+                _settingsRemote.ShowDialog();
             }
-            else settings_remote.Activate();
+            else _settingsRemote.Activate();
         }
     }
 }

@@ -12,16 +12,16 @@ namespace minecraft_server_gui
     /// </summary>
     public partial class MainWindow
     {
-        private readonly Process SERVER;
-        private StreamWriter SERVER_INPUT;
-        private StreamReader SERVER_OUTPUT;
-        private Thread t;
-        private Admin admin;
-        private Players players;
-        private Settings settings;
-        private byte playersOnline;
-        private string maxPlayers;
-        private Config conf;
+        private readonly Process _server;
+        private StreamWriter _serverInput;
+        private StreamReader _serverOutput;
+        private Thread _t;
+        private Admin _admin;
+        private Players _players;
+        private Settings _settings;
+        private byte _playersOnline;
+        private string _maxPlayers;
+        private Config _conf;
         
         public bool IsServerShutdown;
 
@@ -32,16 +32,16 @@ namespace minecraft_server_gui
             Properties.Settings.Default.IsPlayerWindowActive = false;
             Properties.Settings.Default.IsServerRunning = false;
             IsServerShutdown = false;
-            SERVER = new Process();
-            Textbox_Log.TextWrapping = TextWrapping.Wrap;
-            Textbox_Log.AcceptsReturn = true;
-            Textbox_Log.IsReadOnly = true;
-            Button_Admin.IsEnabled = false;
-            Button_Players.IsEnabled = false;
-            Button_Send.IsEnabled = false;
-            playersOnline = 0;
+            _server = new Process();
+            TextboxLog.TextWrapping = TextWrapping.Wrap;
+            TextboxLog.AcceptsReturn = true;
+            TextboxLog.IsReadOnly = true;
+            ButtonAdmin.IsEnabled = false;
+            ButtonPlayers.IsEnabled = false;
+            ButtonSend.IsEnabled = false;
+            _playersOnline = 0;
             Properties.Settings.Default.ReadMaxPlayers();
-            maxPlayers = Properties.Settings.Default.max_players;
+            _maxPlayers = Properties.Settings.Default.max_players;
             UpdatePlayersOnline();
         }
 
@@ -59,52 +59,52 @@ namespace minecraft_server_gui
 
         private void Button_Start_Click(object sender, RoutedEventArgs e)
         {
-            Button_Start.IsEnabled = false;
-            Status_Text.Content = "Запускаем...";
+            ButtonStart.IsEnabled = false;
+            StatusText.Content = "Запускаем...";
 
             if (File.Exists(Properties.Settings.Default.java_path) && Properties.Settings.Default.java_path.Contains("java.exe") && File.Exists("minecraft_server.jar"))
             {
-                SERVER.StartInfo.FileName = Properties.Settings.Default.java_path;
-                SERVER.StartInfo.Arguments = "-Xmx" + Properties.Settings.Default.RAM_Max + "M -Xms" + Properties.Settings.Default.RAM_Min + "M -jar minecraft_server.jar nogui";
-                SERVER.StartInfo.CreateNoWindow = true;
-                SERVER.StartInfo.UseShellExecute = false;
-                SERVER.StartInfo.RedirectStandardInput = true;
-                SERVER.StartInfo.RedirectStandardOutput = true;
-                Status_ProgressBar.Value = 3.0;
+                _server.StartInfo.FileName = Properties.Settings.Default.java_path;
+                _server.StartInfo.Arguments = "-Xmx" + Properties.Settings.Default.RAM_Max + "M -Xms" + Properties.Settings.Default.RAM_Min + "M -jar minecraft_server.jar nogui";
+                _server.StartInfo.CreateNoWindow = true;
+                _server.StartInfo.UseShellExecute = false;
+                _server.StartInfo.RedirectStandardInput = true;
+                _server.StartInfo.RedirectStandardOutput = true;
+                StatusProgressBar.Value = 3.0;
 
-                if (SERVER.Start())
+                if (_server.Start())
                 {
-                    Status_ProgressBar.Value = 5.0;
-                    SERVER_INPUT = SERVER.StandardInput;
-                    SERVER_OUTPUT = SERVER.StandardOutput;
+                    StatusProgressBar.Value = 5.0;
+                    _serverInput = _server.StandardInput;
+                    _serverOutput = _server.StandardOutput;
 
-                    Status_ProgressBar.Value = 10.0;
-                    t = new Thread(GetLogMessage) {Name = "Server output reader"};
-                    t.Start();
+                    StatusProgressBar.Value = 10.0;
+                    _t = new Thread(GetLogMessage) {Name = "Server output reader"};
+                    _t.Start();
 
-                    Status_ProgressBar.Value = 15.0;
-                    maxPlayers = Properties.Settings.Default.max_players;
+                    StatusProgressBar.Value = 15.0;
+                    _maxPlayers = Properties.Settings.Default.max_players;
                 }
             }
             else 
             {
-                Status_Text.Content = "Сервер выключен.";
+                StatusText.Content = "Сервер выключен.";
                 MessageBox.Show("Не могу найти файлы java.exe и/или minecraft_server.exe.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                Button_Start.IsEnabled = true;
+                ButtonStart.IsEnabled = true;
             }
         }
 
         private void Button_Stop_Click(object sender, RoutedEventArgs e)
         {
-            Button_Stop.IsEnabled = false;
-            Button_Admin.IsEnabled = false;
-            Button_Players.IsEnabled = false;
-            Button_Send.IsEnabled = false;
-            if (SERVER.Responding)
+            ButtonStop.IsEnabled = false;
+            ButtonAdmin.IsEnabled = false;
+            ButtonPlayers.IsEnabled = false;
+            ButtonSend.IsEnabled = false;
+            if (_server.Responding)
             {
-                SERVER_INPUT.WriteLine("/stop");
+                _serverInput.WriteLine("/stop");
             }
-            else SERVER.Kill();
+            else _server.Kill();
             IsServerShutdown = true;
         }
 
@@ -112,43 +112,43 @@ namespace minecraft_server_gui
         {
             if (!Properties.Settings.Default.IsSettingsWindowActive)
             {
-                settings = new Settings {Owner = this, ShowInTaskbar = false};
+                _settings = new Settings {Owner = this, ShowInTaskbar = false};
                 Properties.Settings.Default.IsSettingsWindowActive = true;
-                settings.ShowDialog();
+                _settings.ShowDialog();
             }
-            else settings.Activate();
+            else _settings.Activate();
         }
 
         private void Button_Send_Click(object sender, RoutedEventArgs e)
         {
             if (Properties.Settings.Default.IsServerRunning)
             {
-                SERVER_INPUT.WriteLine("/say " + Textbox_Send.Text);
-                Textbox_Log.ScrollToEnd();
+                _serverInput.WriteLine("/say " + TextboxSend.Text);
+                TextboxLog.ScrollToEnd();
             }
-            Textbox_Send.Text = "";
+            TextboxSend.Text = "";
         }
 
         private void Textbox_Send_GotFocus(object sender, RoutedEventArgs e)
         {
-            Button_Send.IsDefault = true;
+            ButtonSend.IsDefault = true;
         }
 
         private void Textbox_Send_LostFocus(object sender, RoutedEventArgs e)
         {
-            Button_Send.IsDefault = false;
+            ButtonSend.IsDefault = false;
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             if (Properties.Settings.Default.IsServerRunning)
             {
-                t.Abort();
-                if (SERVER.Responding)
+                _t.Abort();
+                if (_server.Responding)
                 {
-                    SERVER_INPUT.WriteLine("/stop");
+                    _serverInput.WriteLine("/stop");
                 }
-                else SERVER.Kill();
+                else _server.Kill();
             }
         }
 
@@ -156,18 +156,18 @@ namespace minecraft_server_gui
         {
             if (!Properties.Settings.Default.IsAdminWindowActive)
             {
-                admin = new Admin
+                _admin = new Admin
                 {
-                    SERVER_INPUT = SERVER_INPUT,
+                    ServerInput = _serverInput,
                     Left = Left + Width,
                     Top = Top,
                     Owner = this,
                     ShowInTaskbar = false
                 };
                 Properties.Settings.Default.IsAdminWindowActive = true;
-                admin.Show();
+                _admin.Show();
             }
-            else admin.Activate();
+            else _admin.Activate();
         }
 
         private delegate void Invoker(string arg);
@@ -176,30 +176,30 @@ namespace minecraft_server_gui
         {
             if (!Properties.Settings.Default.IsServerRunning)
             {
-                if (arg.Contains("Starting minecraft server version")) Status_ProgressBar.Value = 25.0;
-                else if (arg.Contains("Loading properties")) Status_ProgressBar.Value = 45.0;
-                else if (arg.Contains("Default game type")) Status_ProgressBar.Value = 65.0;
-                else if (arg.Contains("Generating keypair")) Status_ProgressBar.Value = 75.0;
-                else if (arg.Contains("Preparing level")) Status_ProgressBar.Value = 85.0;
-                else if (arg.Contains("Preparing start region")) Status_ProgressBar.Value = 90.0;
-                else if (arg.Contains("Preparing spawn area")) Status_ProgressBar.Value = 95.0;
+                if (arg.Contains("Starting minecraft server version")) StatusProgressBar.Value = 25.0;
+                else if (arg.Contains("Loading properties")) StatusProgressBar.Value = 45.0;
+                else if (arg.Contains("Default game type")) StatusProgressBar.Value = 65.0;
+                else if (arg.Contains("Generating keypair")) StatusProgressBar.Value = 75.0;
+                else if (arg.Contains("Preparing level")) StatusProgressBar.Value = 85.0;
+                else if (arg.Contains("Preparing start region")) StatusProgressBar.Value = 90.0;
+                else if (arg.Contains("Preparing spawn area")) StatusProgressBar.Value = 95.0;
                 else if (arg.Contains("Done"))
                 {
-                    conf = new Config(SERVER_INPUT);
-                    Status_ProgressBar.Value = 0.0;
-                    Button_Stop.IsEnabled = true;
+                    _conf = new Config(_serverInput);
+                    StatusProgressBar.Value = 0.0;
+                    ButtonStop.IsEnabled = true;
                     Properties.Settings.Default.IsServerRunning = true;
-                    Status_Text.Content = "Сервер работает.";
+                    StatusText.Content = "Сервер работает.";
                     UpdatePlayersOnline();
-                    Button_Admin.IsEnabled = true;
-                    Button_Players.IsEnabled = true;
-                    Button_Send.IsEnabled = true;
+                    ButtonAdmin.IsEnabled = true;
+                    ButtonPlayers.IsEnabled = true;
+                    ButtonSend.IsEnabled = true;
                 }
             }
             else if (IsServerShutdown)
             {
-                Status_Text.Content = "Выключаем...";
-                Status_ProgressBar.Value = 50.0;
+                StatusText.Content = "Выключаем...";
+                StatusProgressBar.Value = 50.0;
                 ShutownServer();
             }
             else
@@ -209,9 +209,9 @@ namespace minecraft_server_gui
                     string nickname = arg.Substring(33);
                     nickname = nickname.Substring(0, nickname.Length - 16);
                     Properties.Settings.Default.PlayerNames.Add(nickname);
-                    conf.JoinAct(nickname);
-                    if (Properties.Settings.Default.IsPlayerWindowActive) players.List_Players.Items.Refresh();
-                    playersOnline += 1;
+                    _conf.JoinAct(nickname);
+                    if (Properties.Settings.Default.IsPlayerWindowActive) _players.ListPlayers.Items.Refresh();
+                    _playersOnline += 1;
                     UpdatePlayersOnline();
                 }
                 else if (arg.Contains("left the game"))
@@ -219,19 +219,19 @@ namespace minecraft_server_gui
                     string nickname = arg.Substring(33);
                     nickname = nickname.Substring(0, nickname.Length - 14);
                     Properties.Settings.Default.PlayerNames.Remove(nickname);
-                    if(Properties.Settings.Default.IsPlayerWindowActive) players.List_Players.Items.Refresh();
-                    playersOnline -= 1;
+                    if(Properties.Settings.Default.IsPlayerWindowActive) _players.ListPlayers.Items.Refresh();
+                    _playersOnline -= 1;
                     UpdatePlayersOnline();
                 }
                 else if (arg.Contains("Time ran backwards") || arg.Contains("Can't keep up"))
                 {
-                    SERVER_INPUT.WriteLine("/say There's was a lag on server side.");
+                    _serverInput.WriteLine("/say There's was a lag on server side.");
                 }
 
             }
 
-            Textbox_Log.ScrollToEnd();
-            Textbox_Log.Text += arg + "\n";
+            TextboxLog.ScrollToEnd();
+            TextboxLog.Text += arg + "\n";
         }
 
         private void GetLogMessage()
@@ -240,11 +240,11 @@ namespace minecraft_server_gui
             {
                 if (!Dispatcher.CheckAccess())
                 {
-                    Dispatcher.Invoke(new Invoker(PrintLogMessage), SERVER_OUTPUT.ReadLine());
+                    Dispatcher.Invoke(new Invoker(PrintLogMessage), _serverOutput.ReadLine());
                 }
                 else
                 {
-                    PrintLogMessage(SERVER_OUTPUT.ReadLine());
+                    PrintLogMessage(_serverOutput.ReadLine());
                 }
             }
             // ReSharper disable once FunctionNeverReturns
@@ -254,17 +254,17 @@ namespace minecraft_server_gui
         {
             while (true)
             {
-                if (SERVER.HasExited)
+                if (_server.HasExited)
                 {
                     break;
                 }
             }
-            Button_Start.IsEnabled = true;
+            ButtonStart.IsEnabled = true;
             Properties.Settings.Default.IsServerRunning = false;
             IsServerShutdown = false;
-            t.Abort();
-            Status_ProgressBar.Value = 0.0;
-            Status_Text.Content = "Сервер выключен.";
+            _t.Abort();
+            StatusProgressBar.Value = 0.0;
+            StatusText.Content = "Сервер выключен.";
             UpdatePlayersOnline();
         }
 
@@ -272,27 +272,27 @@ namespace minecraft_server_gui
         {
             if (Properties.Settings.Default.IsAdminWindowActive)
             {
-                admin.Left = Left + Width;
-                admin.Top = Top;
+                _admin.Left = Left + Width;
+                _admin.Top = Top;
             }
             if (Properties.Settings.Default.IsPlayerWindowActive)
             {
-                players.Left = Left;
-                players.Top = Top + Height;
+                _players.Left = Left;
+                _players.Top = Top + Height;
             }
         }
 
         private void UpdatePlayersOnline()
         {
-            if (Properties.Settings.Default.IsServerRunning) Status_Players_Online.Content = "Игроков онлайн: " + Convert.ToString(playersOnline) + "/" + maxPlayers;
-            else Status_Players_Online.Content = "Игроков онлайн: -";
+            if (Properties.Settings.Default.IsServerRunning) StatusPlayersOnline.Content = "Игроков онлайн: " + Convert.ToString(_playersOnline) + "/" + _maxPlayers;
+            else StatusPlayersOnline.Content = "Игроков онлайн: -";
         }
 
         private void Button_Players_Click(object sender, RoutedEventArgs e)
         {
             if (!Properties.Settings.Default.IsPlayerWindowActive)
             {
-                players = new Players
+                _players = new Players
                 {
                     Left = Left,
                     Top = Top + Height,
@@ -300,10 +300,10 @@ namespace minecraft_server_gui
                     ShowInTaskbar = false
                 };
                 Properties.Settings.Default.IsPlayerWindowActive = true;
-                players.SERVER_INPUT = SERVER_INPUT;
-                players.Show();
+                _players.ServerInput = _serverInput;
+                _players.Show();
             }
-            else players.Activate();
+            else _players.Activate();
         }
 
         /*private void ConnectMessage(string playerName)

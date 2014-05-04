@@ -1,4 +1,4 @@
-﻿<Window x:Name="Window_Settings_Remote" x:Class="minecraft_server_gui.Settings_Remote"
+﻿<Window x:Name="WindowSettingsRemote" x:Class="minecraft_server_gui.SettingsRemote"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Удалённый доступ" Height="300" Width="300" Icon="Chrisl21-Minecraft-3D-Grass.ico" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closed="Window_Settings_Remote_Closed">

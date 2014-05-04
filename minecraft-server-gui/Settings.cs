@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.IO;
 
+// ReSharper disable once CheckNamespace
 namespace minecraft_server_gui.Properties {
     
     
