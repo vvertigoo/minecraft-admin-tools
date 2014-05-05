@@ -11,19 +11,27 @@ namespace minecraft_server_gui
     {
         private readonly List<ConfigItemBase> _onJoin;
         private readonly List<ConfigItemTimed> _timed;
-        private readonly StreamWriter _serverInput;
+        public StreamWriter ServerInput { get; set; }
 
         private ConfigState _configState;
 
-        public Config(StreamWriter serverInput)
+        public Config()
         {
-            _serverInput = serverInput;
             _onJoin = new List<ConfigItemBase>();
             _timed = new List<ConfigItemTimed>();
+        }
 
+        ~Config()
+        {
+            _onJoin.Clear();
+            _timed.Clear();
+        }
+
+        public void StartConfig()
+        {
             if (File.Exists("minecraft-server-gui.conf"))
             {
-                StreamReader cfgReader = File.OpenText("minecraft-server-gui.conf");
+                var cfgReader = File.OpenText("minecraft-server-gui.conf");
                 while (!cfgReader.EndOfStream)
                 {
                     ParseConfigLine(cfgReader.ReadLine());
@@ -32,63 +40,63 @@ namespace minecraft_server_gui
             }
             else
             {
-                StreamWriter cfgWriter = File.CreateText("minecraft-server-gui.conf");
+                var cfgWriter = File.CreateText("minecraft-server-gui.conf");
                 cfgWriter.WriteLine("### <- this is comment line");
                 cfgWriter.WriteLine("###");
-                cfgWriter.WriteLine("### Now we have two options - console input and backup world.");
+                cfgWriter.WriteLine("### Now we have only one option - console input.");
                 cfgWriter.WriteLine("### Here is sample");
                 cfgWriter.WriteLine("");
                 cfgWriter.WriteLine("[onjoin]");
                 cfgWriter.WriteLine("CONSOLE /tellraw %playername% {text:\"[SERVER] Sometext\",color:green,bold:true}");
                 cfgWriter.WriteLine("");
                 cfgWriter.WriteLine("[timed]");
-                cfgWriter.WriteLine("### Please notice, that time should be set in minutes");
-                cfgWriter.WriteLine("1 BACKUP");
+                cfgWriter.WriteLine("### Please notice, that time should be set in minutes!");
                 cfgWriter.WriteLine("2 CONSOLE /say Sometext");
                 cfgWriter.Close();
             }
         }
 
+        public void StopConfig()
+        {
+            _onJoin.Clear();
+            _timed.Clear();
+        }
+
         private void ParseConfigLine(string input)
         {
-            if (!input.StartsWith("###"))
+            if (input.StartsWith("###")) return;
+            if (input.StartsWith("[onjoin]"))
             {
-                if (input.StartsWith("[onjoin]"))
-                {
-                    _configState = ConfigState.OnJoin;
-                }
-                else if (input.StartsWith("[timed]"))
-                {
-                    _configState = ConfigState.Timed;
-                }
-                else if (input.StartsWith("CONSOLE"))
-                {
-                    if (_configState == ConfigState.OnJoin)
-                    {
-                        string data = input.Substring("CONSOLE ".Length);
-                        _onJoin.Add(new ConfigItemBase(ItemType.Console, data));
-                    }
-                }
-                else if (input.StartsWith("BACKUP"))
-                {
-                    BackupWorld();
-                }
-                else if (input.Contains("CONSOLE"))
-                {
-                    int i;
-                    string[] subs = Regex.Split(input, " CONSOLE ");
-                    int.TryParse(subs[0], out i);
-                    string command = subs[1];
-                    _timed.Add(new ConfigItemTimed(ItemType.Backup, command, i, Handler));
-                }
-                else if (input.Contains("BACKUP"))
-                {
-                    int i;
-                    string[] subs = Regex.Split(input, " BACKUP");
-                    int.TryParse(subs[0], out i);
-                    _timed.Add(new ConfigItemTimed(ItemType.Backup, " ", i, Handler));
-                }
-
+                _configState = ConfigState.OnJoin;
+            }
+            else if (input.StartsWith("[timed]"))
+            {
+                _configState = ConfigState.Timed;
+            }
+            else if (input.StartsWith("CONSOLE"))
+            {
+                if (_configState != ConfigState.OnJoin) return;
+                var data = input.Substring("CONSOLE ".Length);
+                _onJoin.Add(new ConfigItemBase(ItemType.Console, data));
+            }
+            else if (input.StartsWith("BACKUP"))
+            {
+                BackupWorld();
+            }
+            else if (input.Contains("CONSOLE"))
+            {
+                int i;
+                var subs = Regex.Split(input, " CONSOLE ");
+                int.TryParse(subs[0], out i);
+                var command = subs[1];
+                _timed.Add(new ConfigItemTimed(ItemType.Console, command, i, Handler));
+            }
+            else if (input.Contains("BACKUP"))
+            {
+                int i;
+                var subs = Regex.Split(input, " BACKUP");
+                int.TryParse(subs[0], out i);
+                _timed.Add(new ConfigItemTimed(ItemType.Backup, " ", i, Handler));
             }
         }
 
@@ -99,12 +107,33 @@ namespace minecraft_server_gui
 
         public void Handler(ItemType type, string parameter)
         {
-            _serverInput.WriteLine("/say DEBUG: Here something happened");
+            switch (type)
+            {
+                case ItemType.Backup:
+                    BackupWorld();
+                    break;
+                case ItemType.Console:
+                    ServerInput.WriteLine(parameter);
+                    break;
+            }
         }
 
         public void JoinAct(string playername)
         {
-            _serverInput.WriteLine("/say DEBUG: Someone joined");
+            if (_onJoin.Count <= 0) return;
+            foreach (var message in _onJoin)
+            {
+                switch (message.Type)
+                {
+                    case ItemType.Backup:
+                        BackupWorld();
+                        break;
+                    case ItemType.Console:
+                        var text = message.Parameter.Replace("%playername%", playername);
+                        ServerInput.WriteLine(text);
+                        break;
+                }
+            }
         }
     }
 
@@ -113,11 +142,11 @@ namespace minecraft_server_gui
         /// <summary>
         /// Тип елемента конфигурации
         /// </summary>
-        protected ItemType Type { get; set; }
+        public ItemType Type { get; set; }
         /// <summary>
         /// Параметр елемента
         /// </summary>
-        protected string Parameter { get; set; }
+        public string Parameter { get; set; }
 
         public ConfigItemBase(ItemType type, string parameter)
         {
@@ -129,7 +158,7 @@ namespace minecraft_server_gui
     public class ConfigItemTimed : ConfigItemBase
     {
         protected Timer Timer;
-        readonly HandleFunc _func;
+        private readonly HandleFunc _func;
 
         public ConfigItemTimed(ItemType type, string parameter, int delay, HandleFunc func)
             :base (type, parameter)
@@ -138,6 +167,12 @@ namespace minecraft_server_gui
             _func = func;
             Timer.Elapsed += Handler;
             Timer.Interval = delay * 60000;
+            Timer.Start();
+        }
+
+        ~ConfigItemTimed()
+        {
+            Timer.Stop();
         }
 
         private void Handler(object source, ElapsedEventArgs e)

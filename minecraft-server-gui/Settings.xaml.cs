@@ -39,7 +39,7 @@ namespace minecraft_server_gui
             };
 
             // Show open file dialog box
-            bool? result = dlg.ShowDialog();
+            var result = dlg.ShowDialog();
 
             // Process open file dialog box results 
             if (result == true)

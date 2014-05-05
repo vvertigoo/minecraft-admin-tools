@@ -51,10 +51,10 @@ namespace minecraft_server_gui.Properties {
         {
             if (File.Exists("server.properties"))
             {
-                StreamReader serverCfgReader = File.OpenText("server.properties");
+                var serverCfgReader = File.OpenText("server.properties");
                 while (!serverCfgReader.EndOfStream)
                 {
-                    string data = serverCfgReader.ReadLine();
+                    var data = serverCfgReader.ReadLine();
                     if (data != null && data.Contains("max-players"))
                     {
                         max_players = data.Substring("max-players=".Length);
@@ -65,7 +65,7 @@ namespace minecraft_server_gui.Properties {
             }
             else
             {
-                StreamWriter serverCfgWriter = File.CreateText("server.properties");
+                var serverCfgWriter = File.CreateText("server.properties");
                 serverCfgWriter.WriteLine("generator-settings=");
                 serverCfgWriter.WriteLine("op-permission-level=4");
                 serverCfgWriter.WriteLine("allow-nether=true");

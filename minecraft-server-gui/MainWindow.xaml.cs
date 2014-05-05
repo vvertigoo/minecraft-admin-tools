@@ -21,7 +21,7 @@ namespace minecraft_server_gui
         private Settings _settings;
         private byte _playersOnline;
         private string _maxPlayers;
-        private Config _conf;
+        private readonly Config _config;
         
         public bool IsServerShutdown;
 
@@ -43,6 +43,7 @@ namespace minecraft_server_gui
             Properties.Settings.Default.ReadMaxPlayers();
             _maxPlayers = Properties.Settings.Default.max_players;
             UpdatePlayersOnline();
+            _config = new Config();
         }
 
         private void Button_Exit_Click(object sender, RoutedEventArgs e)
@@ -100,6 +101,7 @@ namespace minecraft_server_gui
             ButtonAdmin.IsEnabled = false;
             ButtonPlayers.IsEnabled = false;
             ButtonSend.IsEnabled = false;
+            _config.StopConfig();
             if (_server.Responding)
             {
                 _serverInput.WriteLine("/stop");
@@ -185,7 +187,8 @@ namespace minecraft_server_gui
                 else if (arg.Contains("Preparing spawn area")) StatusProgressBar.Value = 95.0;
                 else if (arg.Contains("Done"))
                 {
-                    _conf = new Config(_serverInput);
+                    _config.ServerInput = _serverInput;
+                    _config.StartConfig();
                     StatusProgressBar.Value = 0.0;
                     ButtonStop.IsEnabled = true;
                     Properties.Settings.Default.IsServerRunning = true;
@@ -206,17 +209,17 @@ namespace minecraft_server_gui
             {
                 if(arg.Contains("joined the game"))
                 {
-                    string nickname = arg.Substring(33);
+                    var nickname = arg.Substring(33);
                     nickname = nickname.Substring(0, nickname.Length - 16);
                     Properties.Settings.Default.PlayerNames.Add(nickname);
-                    _conf.JoinAct(nickname);
+                    _config.JoinAct(nickname);
                     if (Properties.Settings.Default.IsPlayerWindowActive) _players.ListPlayers.Items.Refresh();
                     _playersOnline += 1;
                     UpdatePlayersOnline();
                 }
                 else if (arg.Contains("left the game"))
                 {
-                    string nickname = arg.Substring(33);
+                    var nickname = arg.Substring(33);
                     nickname = nickname.Substring(0, nickname.Length - 14);
                     Properties.Settings.Default.PlayerNames.Remove(nickname);
                     if(Properties.Settings.Default.IsPlayerWindowActive) _players.ListPlayers.Items.Refresh();

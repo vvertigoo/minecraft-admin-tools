@@ -23,10 +23,10 @@ namespace minecraft_server_gui
 
         private void ReadServerCfg()
         {
-            StreamReader serverCfgReader = File.OpenText("server.properties");
+            var serverCfgReader = File.OpenText("server.properties");
             while (!serverCfgReader.EndOfStream)
             {
-                string data = serverCfgReader.ReadLine();
+                var data = serverCfgReader.ReadLine();
                 if (data.Contains("generator-settings")) TextboxGeneratorSettings.Text = data.Substring("generator-settings=".Length);
                 else if (data.Contains("op-permission-level")) TextboxOpPermissionLevel.Text = data.Substring("op-permission-level=".Length);
                 else if (data.Contains("allow-nether")) TextboxAllowNether.Text = data.Substring("allow-nether=".Length);
@@ -66,7 +66,7 @@ namespace minecraft_server_gui
         private void WriteServerCfg()
         {
             File.Delete("server.properties");
-            StreamWriter serverCfgWriter = File.CreateText("server.properties");
+            var serverCfgWriter = File.CreateText("server.properties");
             serverCfgWriter.WriteLine("generator-settings=" + TextboxGeneratorSettings.Text);
             serverCfgWriter.WriteLine("op-permission-level=" + TextboxOpPermissionLevel.Text);
             serverCfgWriter.WriteLine("allow-nether=" + TextboxAllowNether.Text);
@@ -105,7 +105,7 @@ namespace minecraft_server_gui
 
         private void CreateNewCfg()
         {
-            StreamWriter serverCfgWriter = File.CreateText("server.properties");
+            var serverCfgWriter = File.CreateText("server.properties");
             serverCfgWriter.WriteLine("generator-settings=");
             serverCfgWriter.WriteLine("op-permission-level=4");
             serverCfgWriter.WriteLine("allow-nether=true");
