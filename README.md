@@ -16,6 +16,10 @@ To use it you need follow this simple steps:
 ## Changelog:
 --------------------------------------------------------------
 
+### v0.5
+* Great new task config file! To see how to use it just run your server - minecraft-server-gui.conf
+  would appear in same folder. Here you can do anything with console when player joins or set your timed events.
+
 ### v0.4
 * New feature: server preferences editor
 * Bug fixes: some bugs with windows and taskbar
