@@ -59,6 +59,10 @@ namespace minecraft_server_gui
         public void StopConfig()
         {
             _onJoin.Clear();
+            foreach (var item in _timed)
+            {
+                item.StopTimer();
+            }
             _timed.Clear();
         }
 
@@ -170,9 +174,10 @@ namespace minecraft_server_gui
             Timer.Start();
         }
 
-        ~ConfigItemTimed()
+        public void StopTimer()
         {
             Timer.Stop();
+            Timer.Close();
         }
 
         private void Handler(object source, ElapsedEventArgs e)

@@ -7,7 +7,7 @@ using System.Windows;
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
 
-[assembly: AssemblyTitle("Minecraft Server GUI v0.5")]
+[assembly: AssemblyTitle("Minecraft Server GUI v0.5.1")]
 [assembly: AssemblyDescription("Minecraft server admin tool")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("BCV")]
@@ -53,6 +53,6 @@ using System.Windows;
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("0.5.0.0")]
-[assembly: AssemblyFileVersion("0.5.0.0")]
+[assembly: AssemblyVersion("0.5.1.0")]
+[assembly: AssemblyFileVersion("0.5.1.0")]
 [assembly: NeutralResourcesLanguage("ru-RU")]
