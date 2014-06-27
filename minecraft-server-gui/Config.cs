@@ -1,7 +1,9 @@
 ﻿using System.IO;
+using System.IO.Compression;
 using System.Timers;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace minecraft_server_gui
 {
@@ -11,6 +13,8 @@ namespace minecraft_server_gui
     {
         private readonly List<ConfigItemBase> _onJoin;
         private readonly List<ConfigItemTimed> _timed;
+        private bool _isBackupNeeded;
+        private string _worldName;
         public StreamWriter ServerInput { get; set; }
 
         private ConfigState _configState;
@@ -19,6 +23,7 @@ namespace minecraft_server_gui
         {
             _onJoin = new List<ConfigItemBase>();
             _timed = new List<ConfigItemTimed>();
+            _isBackupNeeded = false;
         }
 
         ~Config()
@@ -31,6 +36,7 @@ namespace minecraft_server_gui
         {
             if (File.Exists("minecraft-server-gui.conf"))
             {
+                _worldName = ReadWorldName();
                 var cfgReader = File.OpenText("minecraft-server-gui.conf");
                 while (!cfgReader.EndOfStream)
                 {
@@ -106,7 +112,24 @@ namespace minecraft_server_gui
 
         private void BackupWorld()
         {
+            ServerInput.WriteLine("/say Starting backup...");
+            _isBackupNeeded = true;
+            ServerInput.WriteLine("/save-off");
+            ServerInput.WriteLine("/save-all");
+        }
 
+        public void WorldSaved()
+        {
+            if (!_isBackupNeeded) return;
+            string path = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
+            if (!Directory.Exists(path + @"\backup"))
+            {
+                Directory.CreateDirectory(path + @"\Backup");
+            }
+            ZipFile.CreateFromDirectory(path + @"\" + _worldName + @"\", path + @"\backup\backup_" + _worldName + ".zip");
+            ServerInput.WriteLine("/save-on");
+            ServerInput.WriteLine("/say Backup complete!");
+            _isBackupNeeded = false;
         }
 
         public void Handler(ItemType type, string parameter)
@@ -139,6 +162,60 @@ namespace minecraft_server_gui
                 }
             }
         }
+
+        private string ReadWorldName()
+        {
+            if (File.Exists("server.properties"))
+            {
+                var serverCfgReader = File.OpenText("server.properties");
+                while (!serverCfgReader.EndOfStream)
+                {
+                    var data = serverCfgReader.ReadLine();
+                    if (data == null || !data.Contains("level-name")) continue;
+                    return data.Substring("level-name=".Length);
+                }
+                serverCfgReader.Close();
+            }
+            else
+            {
+                var serverCfgWriter = File.CreateText("server.properties");
+                serverCfgWriter.WriteLine("generator-settings=");
+                serverCfgWriter.WriteLine("op-permission-level=4");
+                serverCfgWriter.WriteLine("allow-nether=true");
+                serverCfgWriter.WriteLine("level-name=world");
+                serverCfgWriter.WriteLine("enable-query=false");
+                serverCfgWriter.WriteLine("allow-flight=false");
+                serverCfgWriter.WriteLine("announce-player-achievements=false");
+                serverCfgWriter.WriteLine("server-port=25565");
+                serverCfgWriter.WriteLine("level-type=DEFAULT");
+                serverCfgWriter.WriteLine("enable-rcon=false");
+                serverCfgWriter.WriteLine("force-gamemode=false");
+                serverCfgWriter.WriteLine("level-seed=");
+                serverCfgWriter.WriteLine("server-ip=");
+                serverCfgWriter.WriteLine("max-build-height=256");
+                serverCfgWriter.WriteLine("spawn-npcs=true");
+                serverCfgWriter.WriteLine("white-list=false");
+                serverCfgWriter.WriteLine("spawn-animals=true");
+                serverCfgWriter.WriteLine("snooper-enabled=false");
+                serverCfgWriter.WriteLine("hardcore=false");
+                serverCfgWriter.WriteLine("online-mode=false");
+                serverCfgWriter.WriteLine("resource-pack=");
+                serverCfgWriter.WriteLine("pvp=true");
+                serverCfgWriter.WriteLine("difficulty=1");
+                serverCfgWriter.WriteLine("enable-command-block=false");
+                serverCfgWriter.WriteLine("player-idle-timeout=0");
+                serverCfgWriter.WriteLine("gamemode=0");
+                serverCfgWriter.WriteLine("max-players=20");
+                serverCfgWriter.WriteLine("spawn-monsters=true");
+                serverCfgWriter.WriteLine("view-distance=10");
+                serverCfgWriter.WriteLine("generate-structures=true");
+                serverCfgWriter.WriteLine("spawn-protection=16");
+                serverCfgWriter.WriteLine("motd=A Minecraft Server");
+                serverCfgWriter.Close();
+                return "world";
+            }
+            return null;
+        }
     }
 
     public class ConfigItemBase
@@ -161,13 +238,13 @@ namespace minecraft_server_gui
 
     public class ConfigItemTimed : ConfigItemBase
     {
-        protected Timer Timer;
+        protected System.Timers.Timer Timer;
         private readonly HandleFunc _func;
 
         public ConfigItemTimed(ItemType type, string parameter, int delay, HandleFunc func)
             :base (type, parameter)
         {
-            Timer = new Timer();
+            Timer = new System.Timers.Timer();
             _func = func;
             Timer.Elapsed += Handler;
             Timer.Interval = delay * 60000;

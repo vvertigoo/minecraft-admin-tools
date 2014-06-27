@@ -7,6 +7,20 @@ using System.Diagnostics;
 
 namespace minecraft_server_gui
 {
+    #region Backup event
+    public delegate void EventDelegate();
+
+    public class BackupEventer
+    {
+        public event EventDelegate BackupEvent = null;
+
+        public void InvokeEvent()
+        {
+            BackupEvent.Invoke();
+        }
+    }
+    #endregion
+
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
@@ -22,6 +36,7 @@ namespace minecraft_server_gui
         private byte _playersOnline;
         private string _maxPlayers;
         private readonly Config _config;
+        private readonly BackupEventer _worldSaved;
         
         public bool IsServerShutdown;
 
@@ -44,6 +59,9 @@ namespace minecraft_server_gui
             _maxPlayers = Properties.Settings.Default.max_players;
             UpdatePlayersOnline();
             _config = new Config();
+            _worldSaved = new BackupEventer();
+            _worldSaved.BackupEvent += _config.WorldSaved;
+
         }
 
         private void Button_Exit_Click(object sender, RoutedEventArgs e)
@@ -230,11 +248,15 @@ namespace minecraft_server_gui
                 {
                     _serverInput.WriteLine("/say There's was a lag on server side.");
                 }
-
+                else if (arg.Contains("Saved the world"))
+                {
+                    Thread.Sleep(100);
+                    _worldSaved.InvokeEvent();
+                }
             }
 
-            TextboxLog.ScrollToEnd();
             TextboxLog.Text += arg + "\n";
+            TextboxLog.ScrollToEnd();
         }
 
         private void GetLogMessage()

@@ -22,6 +22,7 @@ namespace minecraft_server_gui.Properties {
         public bool IsSettingsRemoteWindowActive;
         public bool IsServerRunning;
         public List<string> PlayerNames;
+        public string WorldName;
         
         public Settings() {
             // // Для добавления обработчиков событий для сохранения и изменения параметров раскомментируйте приведенные ниже строки:
@@ -37,7 +38,6 @@ namespace minecraft_server_gui.Properties {
             IsSettingsRemoteWindowActive = false;
             IsServerRunning = false;
             PlayerNames = new List<string>();
-            //
         }
         
         private void SettingsSavingEventHandler(object sender, CancelEventArgs e) {
@@ -55,11 +55,9 @@ namespace minecraft_server_gui.Properties {
                 while (!serverCfgReader.EndOfStream)
                 {
                     var data = serverCfgReader.ReadLine();
-                    if (data != null && data.Contains("max-players"))
-                    {
-                        max_players = data.Substring("max-players=".Length);
-                        break;
-                    }
+                    if (data == null || !data.Contains("max-players")) continue;
+                    max_players = data.Substring("max-players=".Length);
+                    break;
                 }
                 serverCfgReader.Close();
             }
